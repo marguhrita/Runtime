@@ -1,0 +1,4 @@
+repository "CS Game 2025-08-14_16-00-39/CS Game@5772892813548@cloud"
+  path "/"
+    br "/main"
+    co "/main"
