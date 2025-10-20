@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "CS-Game.sln"
+    "dotnet.defaultSolution": "CS Game.sln"
 }
