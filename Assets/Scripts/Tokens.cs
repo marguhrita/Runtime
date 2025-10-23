@@ -10,9 +10,11 @@ public enum TokenType
     // Syntax things
     LPAR, //(
     RPAR, //)
-    SEMI,
+    EOL,
     RCURLY,
     LCURLY,
+    ASSIGN,
+EOF,
 
     // FUNCTIONAL KEYWORDS
     VAR,
@@ -26,7 +28,7 @@ public class Token
     public TokenType token;
     public dynamic value; // trust me bro 
 
-    Token(TokenType token, dynamic value = null){ this.token = token; this.value = value; }
+    public Token(TokenType token, dynamic value = null){ this.token = token; this.value = value; }
 }
 
 
