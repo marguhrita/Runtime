@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Rendering.BuiltIn.ShaderGraph;
@@ -44,6 +43,8 @@ public class Editor : MonoBehaviour
 
     }
 
+
+
     public void OnValueChanged(string text)
     {
         if (text.EndsWith("\n"))
@@ -56,11 +57,12 @@ public class Editor : MonoBehaviour
                 lineCount += 1;
             }
         }
+
     }
     
     public void submit()
     {
-        Lexer l = Lexer(codeText.text);
-        Debug.Log(l.tokenize.ToString());
+        Lexer l = new Lexer();
+        Debug.Log(l.tokenize(codeText.text).ToString());
     }
 }

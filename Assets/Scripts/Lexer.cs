@@ -10,6 +10,8 @@ public class Lexer
 {
     private Scanner scanner;
     private char c;
+
+    public Lexer() { }
     public List<Token> tokenize(string code)
     {
         List<Token> tokens = new List<Token>();
@@ -79,7 +81,7 @@ public class Lexer
                 }
                 else
                 {
-                    tokens.Add(new Token(TokenType.identifier, name));
+                    tokens.Add(new Token(TokenType.ID, name));
                     scanner.Consume();
                 }
             }
