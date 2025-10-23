@@ -32,6 +32,22 @@ public class Token
 }
 
 
+
+
+
+
+
+
+
+public enum NodeType
+{
+    Call,
+    Assign,
+    StringVar,
+IntVar
+}
+
+
 public abstract class Node
 {
     public NodeType type { get; }
