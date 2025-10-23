@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using UnityEngine;
 
 
 
@@ -26,9 +27,12 @@ public class Lexer
         }
         c = (char)scanner.Peek();
 
-        while (!end)
-        {
+        int iters = 0;
 
+        while (!end && iters < 10)
+        {
+            iters += 1;
+            //Debug.Log(iters);
             if (c == '(')
             {
                 tokens.Add(new Token(TokenType.LPAR));
@@ -63,7 +67,9 @@ public class Lexer
 
             else if (scanner.Alphanumeric.Contains(c))
             {
-                string name = scanner.peekString().ToLower();
+                Debug.Log("hi");
+
+                string name = scanner.peekWord().ToLower();
                 if (name == "variable")
                 {
                     tokens.Add(new Token(TokenType.VAR, "variable"));
@@ -84,17 +90,20 @@ public class Lexer
                     tokens.Add(new Token(TokenType.ID, name));
                     scanner.Consume();
                 }
+
             }
-
-
-
             // String
             else if (c == '"')
             {
                 scanner.Consume();  // Eat the quote
                 string s = scanner.peekString(); // returns up to the end of the string (not including ending quote)
-                scanner.Consume(s.Length + 1); // Consume the string from buffer, plus the ending quote
+                scanner.Consume(); // Eat the other quote
                 tokens.Add(new Token(TokenType.STRING, s));
+            }
+            else
+            {
+                Debug.Log("huh.. i guess this was it: " + c);
+                //scanner.Consume();
             }
 
             if (scanner.Peek() == null)
@@ -102,10 +111,15 @@ public class Lexer
             // End of file!
             tokens.Add(new Token(TokenType.EOF));
             end = true;
-        }
+            }
+            else
+            {
+                // Incrememnt C
+                c = (char)scanner.Peek();
+                Debug.Log(c);
+            }
 
-            // Incrememnt C
-            c = (char)scanner.Peek();
+            
         }
 
         return tokens;
