@@ -63,6 +63,10 @@ public class Editor : MonoBehaviour
     public void submit()
     {
         Lexer l = new Lexer();
-        Debug.Log(l.tokenize(codeText.text).ToString());
+        List<Token> tokens = l.tokenize(codeText.text);
+        foreach (Token t in tokens)
+        {
+            Debug.Log(t.ToString());
+        }
     }
 }

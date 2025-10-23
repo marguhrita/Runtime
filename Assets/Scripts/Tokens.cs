@@ -26,9 +26,14 @@ EOF,
 public class Token
 {
     public TokenType token;
-    public dynamic value; // trust me bro 
+    public object value; // trust me bro 
 
-    public Token(TokenType token, dynamic value = null){ this.token = token; this.value = value; }
+    public Token(TokenType token, object value = null) { this.token = token; this.value = value; }
+
+    public override string ToString()
+    {
+        return  $"Token({this.token}, Value: {this.value?.ToString() ?? "null"})";
+    }
 }
 
 

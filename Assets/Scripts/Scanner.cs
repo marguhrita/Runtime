@@ -1,6 +1,9 @@
 using System;
 using System.Text;
 using NUnit.Framework.Constraints;
+using UnityEngine.InputSystem.Interactions;
+using UnityEngine;
+
 
 public class Scanner
 {
@@ -15,7 +18,7 @@ public class Scanner
     public char? Peek()
     {
         // Check if string is empty
-        if (Buf.Length == 0)
+        if (Buf.Length <= 1)
         {
             return null;
         }
@@ -27,7 +30,35 @@ public class Scanner
     public void Consume(int n = 1)
     {
         // consumes the first n letters in the buffer, 1 by default
+        Debug.Log("consumed: " + Buf[0]);
         Buf.Remove(0, n);
+    }
+
+    public string peekWord()
+    {
+        StringBuilder s = new StringBuilder("");
+
+        if (Peek() is not char)
+        {
+            Debug.Log("Empty?");
+            return null;
+        }
+        char c = (char)Peek();
+        Debug.Log(c);
+        while (Alphanumeric.Contains(c))
+        {
+            s.Append(c);
+            Consume();
+
+            if (Peek() is not char)
+            {
+                break;
+            }
+            c = (char)Peek();
+            Debug.Log(c);
+        }
+
+        return s.ToString();
     }
 
     public string peekString()
@@ -39,7 +70,7 @@ public class Scanner
             return null;
         }
         char c = (char)Peek();
-        while (Alphanumeric.Contains(c))
+        while (Alphanumeric.Contains(c) || c == ' ')
         {
             s.Append(c);
             Consume();
@@ -53,6 +84,4 @@ public class Scanner
 
         return s.ToString();
     }
-
-
-}
+    }

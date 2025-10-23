@@ -9,7 +9,6 @@ public class TextInputHandler : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Viewport: " + textArea.textViewport.position);
         //Debug.Log("Anchored: " + textArea.);
 
     }
