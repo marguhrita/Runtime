@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Collections;
+using System.Collections.Generic;
 
 public enum TokenType
 {
@@ -15,7 +15,8 @@ public enum TokenType
     EOL,
     RCURLY,
     LCURLY,
-ASSIGN,
+    ASSIGN,
+EOF,
 
     // FUNCTIONAL KEYWORDS
     VAR,
@@ -28,69 +29,78 @@ ASSIGN,
 public class Lexer
 {
     private Scanner scanner;
-    private StringBuilder c = new StringBuilder();
+    private char c;
     public List<TokenType> tokenize(string code)
     {
-        List<TokenType> tokens;
-        scanner = Scanner(code);
-        c = scanner.peek();
-        while (c)
+        List<TokenType> tokens = new List<TokenType>();
+        scanner = new Scanner(code);
+        bool end = false;
+        
+        if (scanner.Peek() == null)
+        {
+            // File is empty!
+            tokens.Add(TokenType.EOF);
+            return tokens;
+        }
+        c = (char)scanner.Peek();
+
+        while (!end)
         {
 
-            if (c == "(")
+            if (c == '(')
             {
                 tokens.Add(TokenType.LPAR);
-                scanner.consume();
+                scanner.Consume();
             }
-            else if (c == ")")
+            else if (c == ')')
             {
                 tokens.Add(TokenType.RPAR);
-                scanner.consume();
+                scanner.Consume();
             }
-            else if (c == "{")
+            else if (c == '{')
             {
                 tokens.Add(TokenType.LCURLY);
-                scanner.consume();
+                scanner.Consume();
 
             }
-            else if (c == "}")
+            else if (c == '}')
             {
                 tokens.Add(TokenType.RCURLY);
-                scanner.consume();
+                scanner.Consume();
             }
-            else if (c == ";")
+            else if (c == ';')
             {
                 tokens.Add(TokenType.EOL);
-                scanner.consume();
+                scanner.Consume();
             }
-            else if (c == "=")
+            else if (c == '=')
             {
-                tokens.Add(TokenKind.ASSIGN);
-                scanner.consume();
+                tokens.Add(TokenType.ASSIGN);
+                scanner.Consume();
             }
 
-            else if (scanner.alphanumeric.Contains(c))
+            else if (scanner.Alphanumeric.Contains(c))
             {
                 string name = scanner.peekString().ToLower();
                 if (name == "variable")
                 {
-                    tokens.Add(TokenKind.VAR, "variable");
-                    scanner.consume();
+                    tokens.Add(TokenType.VAR, "variable");
+                    scanner.Consume();
                 }
                 else if (name == "function")
                 {
-                    tokens.Add(TokenKind.FUNCTION, "function");
-                    scanner.consume();
+                    tokens.Add(TokenType.FUNCTION, "function");
+                    scanner.Consume();
                 }
                 else if (name == "if")
                 {
-                    tokens.Add(TokenKind.IF, "if");
-                    scanner.consume();
+                    tokens.Add(TokenType.IF, "if");
+                    scanner.Consume();
                 }
                 else
                 {
-                    tokens.Add(TokenKind.identifier, namw);
-                    scanner.consume();
+                    tokens.Add(TokenType.identifier, name);
+                    scanner.Consume();
                 }
             }
 
@@ -99,15 +109,24 @@ public class Lexer
             // String
             else if (c == '"')
             {
-                scanner.consume();  // Eat the quote
+                scanner.Consume();  // Eat the quote
                 string s = scanner.peekString(); // returns up to the end of the string (not including ending quote)
-                scanner.consume(s.Length + 1); // consume the string from buffer, plus the ending quote
+                scanner.Consume(s.Length + 1); // Consume the string from buffer, plus the ending quote
                 tokens.Add(TokenType.STRING, s);
             }
-            
-            // Incrememnt C
-            c = scanner.peek();
+
+            if (scanner.Peek() == null)
+            {
+            // End of file!
+            tokens.Add(TokenType.EOF);
+            end = true;
         }
+
+            // Incrememnt C
+            c = (char)scanner.Peek();
+        }
+
+        return tokens;
     }
 
     

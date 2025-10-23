@@ -7,7 +7,7 @@ public class Scanner
     private StringBuilder Buf;
     public string Alphanumeric { get; private set; } = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    Scanner(string code)
+    public Scanner(string code)
     {
         this.Buf = new StringBuilder(code);
     }
