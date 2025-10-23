@@ -21,6 +21,15 @@ public enum TokenType
     ID
 }
 
+public class Token
+{
+    public TokenType token;
+    public dynamic value; // trust me bro 
+
+    Token(TokenType token, dynamic value = null){ this.token = token; this.value = value; }
+}
+
+
 public abstract class Node
 {
     public NodeType type { get; }
