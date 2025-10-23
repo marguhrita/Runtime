@@ -1,12 +1,24 @@
+using System.Collections.Generic;
 using System.Data.Common;
 
-public enum NodeType
+public enum TokenType
 {
-    Variable,
-    Function,
-    Conditional,
-Call
+    // Literal Types
+    STRING,
+    NUMBER,
 
+    // Syntax things
+    LPAR, //(
+    RPAR, //)
+    SEMI,
+    RCURLY,
+    LCURLY,
+
+    // FUNCTIONAL KEYWORDS
+    VAR,
+    FUNCTION,
+    IF,
+    ID
 }
 
 public abstract class Node
@@ -23,5 +35,31 @@ public abstract class Node
 public class Call : Node
 {
     public string identifier;
-    Call(string identifier) : base(NodeType.Call) { this.identifier = identifier; }
+    public List<string> args;
+    Call(string identifier, List<string> args) : base(NodeType.Call) { this.identifier = identifier; this.args = args; }
 }
+
+public class StringVar : Node
+{
+    public string identifier;
+    public string data;
+
+    StringVar(string identifier, string data) : base(NodeType.StringVar)
+    {
+        this.identifier = identifier;
+        this.data = data;
+    }
+}
+
+public class IntVar : Node
+{
+    public string identifier;
+    public string data;
+
+    IntVar(string identifier, string data) : base(NodeType.IntVar)
+    {
+        this.identifier = identifier;
+        this.data = data;
+    }
+}
+
