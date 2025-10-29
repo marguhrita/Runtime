@@ -30,7 +30,6 @@ public class Scanner
     public void Consume(int n = 1)
     {
         // consumes the first n letters in the buffer, 1 by default
-        Debug.Log("consumed: " + Buf[0]);
         Buf.Remove(0, n);
     }
 
@@ -38,13 +37,8 @@ public class Scanner
     {
         StringBuilder s = new StringBuilder("");
 
-        if (Peek() is not char)
-        {
-            Debug.Log("Empty?");
-            return null;
-        }
+        
         char c = (char)Peek();
-        Debug.Log(c);
         while (Alphanumeric.Contains(c))
         {
             s.Append(c);
@@ -55,7 +49,6 @@ public class Scanner
                 break;
             }
             c = (char)Peek();
-            Debug.Log(c);
         }
 
         return s.ToString();
@@ -65,10 +58,7 @@ public class Scanner
     {
         StringBuilder s = new StringBuilder("");
 
-        if (Peek() is not char)
-        {
-            return null;
-        }
+        
         char c = (char)Peek();
         while (Alphanumeric.Contains(c) || c == ' ')
         {
@@ -83,5 +73,24 @@ public class Scanner
         }
 
         return s.ToString();
+    }
+
+    public float peekFloat()
+    {
+        StringBuilder s = new StringBuilder("");
+
+        char c = (char)Peek();
+
+        while (char.IsDigit(c))
+        {
+            s.Append(c);
+            Consume();
+
+            c = (char)Peek();
+        }
+
+        float result;
+        float.TryParse(s.ToString(), out result);
+        return result;
     }
     }

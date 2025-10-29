@@ -64,10 +64,16 @@ public class Lexer
                 tokens.Add(new Token(TokenType.ASSIGN));
                 scanner.Consume();
             }
+            // CHeck for numerical values
+            else if (char.IsDigit(c))
+            {
+                float num = scanner.peekFloat();
+                tokens.Add(new Token(TokenType.NUMBER, num));
+                scanner.Consume();
+            }
 
             else if (scanner.Alphanumeric.Contains(c))
             {
-                Debug.Log("hi");
 
                 string name = scanner.peekWord().ToLower();
                 if (name == "variable")
@@ -100,9 +106,14 @@ public class Lexer
                 scanner.Consume(); // Eat the other quote
                 tokens.Add(new Token(TokenType.STRING, s));
             }
+            //spaces
+            else if (char.IsWhiteSpace(c))
+            {
+                scanner.Consume(); // Do nothing for spaces
+            }
             else
             {
-                Debug.Log("huh.. i guess this was it: " + c);
+                Debug.Log("Unmatched Item: " + c);
                 //scanner.Consume();
             }
 
@@ -116,7 +127,6 @@ public class Lexer
             {
                 // Incrememnt C
                 c = (char)scanner.Peek();
-                Debug.Log(c);
             }
 
             

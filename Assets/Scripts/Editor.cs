@@ -53,7 +53,6 @@ public class Editor : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 lineNumbers.text += "\n" + lineCount;
-                Debug.Log("Added line " + lineCount);
                 lineCount += 1;
             }
         }
