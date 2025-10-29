@@ -27,11 +27,9 @@ public class Lexer
         }
         c = (char)scanner.Peek();
 
-        int iters = 0;
 
-        while (!end && iters < 10)
+        while (!end)
         {
-            iters += 1;
             //Debug.Log(iters);
             if (c == '(')
             {
@@ -69,6 +67,11 @@ public class Lexer
             {
                 float num = scanner.peekFloat();
                 tokens.Add(new Token(TokenType.NUMBER, num));
+            }
+            //math
+else if (c == '-')
+            {
+                tokens.Add(new Token(TokenType.MINUS));
                 scanner.Consume();
             }
 
@@ -79,22 +82,18 @@ public class Lexer
                 if (name == "variable")
                 {
                     tokens.Add(new Token(TokenType.VAR, "variable"));
-                    scanner.Consume();
                 }
                 else if (name == "function")
                 {
                     tokens.Add(new Token(TokenType.FUNCTION, "function"));
-                    scanner.Consume();
                 }
                 else if (name == "if")
                 {
                     tokens.Add(new Token(TokenType.IF, "if"));
-                    scanner.Consume();
                 }
                 else
                 {
                     tokens.Add(new Token(TokenType.ID, name));
-                    scanner.Consume();
                 }
 
             }

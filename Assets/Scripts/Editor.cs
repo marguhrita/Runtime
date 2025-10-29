@@ -26,6 +26,8 @@ public class Editor : MonoBehaviour
     public int FontSize => fontSize;
     private int lineCount = 0;
 
+    public GameObject editor;
+
     [Header("Editor Options")]
     [SerializeField] private int fontSize;
     [SerializeField] private TMP_Text lineNumbers;
@@ -41,9 +43,8 @@ public class Editor : MonoBehaviour
         //lineNumbers.text = "1";
         codeText.fontSize = fontSize;
 
+        editor = gameObject;
     }
-
-
 
     public void OnValueChanged(string text)
     {
@@ -67,5 +68,7 @@ public class Editor : MonoBehaviour
         {
             Debug.Log(t.ToString());
         }
+
+        gameObject.SetActive(false);
     }
 }

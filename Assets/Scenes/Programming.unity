@@ -2377,6 +2377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d308e8ac1d3d36438900ed6c576fb79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editor: {fileID: 0}
   fontSize: 19
   lineNumbers: {fileID: 1699996890}
   codeText: {fileID: 224913636}
