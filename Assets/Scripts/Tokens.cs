@@ -20,7 +20,10 @@ EOF,
     VAR,
     FUNCTION,
     IF,
-    ID
+    ID,
+
+    // Math
+    MINUS
 }
 
 public class Token
