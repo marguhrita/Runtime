@@ -10,11 +10,11 @@ public enum TokenType
     // Syntax things
     LPAR, //(
     RPAR, //)
-    EOL,
+    EOL, // ;
     RCURLY,
     LCURLY,
     ASSIGN,
-EOF,
+    EOF,
 
     // FUNCTIONAL KEYWORDS
     VAR,
@@ -39,20 +39,12 @@ public class Token
     }
 }
 
-
-
-
-
-
-
-
-
 public enum NodeType
 {
     Call,
     Assign,
     StringVar,
-IntVar
+    IntVar
 }
 
 
