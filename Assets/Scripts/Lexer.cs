@@ -4,9 +4,6 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-
 public class Lexer
 {
     private Scanner scanner;

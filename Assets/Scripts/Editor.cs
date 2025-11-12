@@ -69,6 +69,10 @@ public class Editor : MonoBehaviour
             Debug.Log(t.ToString());
         }
 
+
+        // Parse the token list
+        
+
         gameObject.SetActive(false);
     }
 }
