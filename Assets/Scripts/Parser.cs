@@ -9,8 +9,11 @@ using UnityEngine.DedicatedServer;
 public class Parser
 {
     private List<Token> tokens;
-    public List<Node> Parse()
+    public List<Node> Parse(List<Token> tokens)
     {
+        // Init tokens
+        this.tokens = tokens;
+
         List<Node> stmts = new List<Node>();
         List<Node> defs = new List<Node>();
 
@@ -61,30 +64,33 @@ public class Parser
 
     private Node Parse_stmt()
     {
-        if (check(TokenType.ASSIGN))
-        {
-            return parse_assitn();
-        }
-
+        // IF statements and whatnot
+        return Parse_assign_and_expr();
     }
 
     private Node Parse_assign_and_expr()
     {
+        // Do assigns at some point
 
-
-
+        return Parse_primary_expr();
     }
 
     private Node Parse_primary_expr()
     {
+
+
         if (check(TokenType.NUMBER))
         {
             Token t = match();
-            return new IntVar();
+            return new IntLit((int)t.value);
         }
+
+        return Parse_call_expr();
 
     }
 
+
+    // Needs to be sure it is a call here
     private Node Parse_call_expr()
     {
         if (check(TokenType.ID))
@@ -92,10 +98,20 @@ public class Parser
             string id_name = (string)match().value;
             if (check(TokenType.LPAR))
             {
-                match();
+                match(); // Left Bracket
                 List<Node> args = Parse_args();
+
+                match(); // Right Bracket
+                return new Call(id_name, args);
             }
         }
+        else
+        {
+            Token t = peek();
+            throw new System.Exception($"Expected Function Call. got {t.type}");
+        }
+
+        return null; // This should never happen (please)
     }
 
     private List<Node> Parse_args()

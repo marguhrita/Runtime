@@ -32,11 +32,11 @@ public class Token
     public TokenType type;
     public object value; // trust me bro 
 
-    public Token(TokenType token, object value = null) { this.type = token; this.value = value; }
+    public Token(TokenType type, object value = null) { this.type = type; this.value = value; }
 
     public override string ToString()
     {
-        return  $"Token({this.token}, Value: {this.value?.ToString() ?? "null"})";
+        return  $"Token({this.type}, Value: {this.value?.ToString() ?? "null"})";
     }
 }
 
