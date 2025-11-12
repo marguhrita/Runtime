@@ -27,7 +27,7 @@ public class Call : Node
 {
     public string identifier;
     public List<Node> args;
-    Call(string identifier, List<Node> args) : base(NodeType.Call) { this.identifier = identifier; this.args = args; }
+    public Call(string identifier, List<Node> args) : base(NodeType.Call) { this.identifier = identifier; this.args = args; }
 }
 
 public class StringVar : Node
@@ -64,9 +64,15 @@ public abstract class Literal<T> : Node
 }
 
 public class IntLit : Literal<int>
-{   
-    public IntLit(int value) : base(value){}
+{
+    public IntLit(int value) : base(value) { }
 }
+
+public class StrLit : Literal<string>
+{   
+    public StrLit(string value) : base(value){}
+}
+
 
 public class Assign : Node
 {

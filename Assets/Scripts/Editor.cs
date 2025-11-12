@@ -71,7 +71,13 @@ public class Editor : MonoBehaviour
 
 
         // Parse the token list
-        
+        Parser p = new Parser();
+        List<Node> nodes = p.Parse(tokens);
+
+        foreach (Node n in nodes)
+        {
+            Debug.Log(n.ToString());
+        }
 
         gameObject.SetActive(false);
     }
