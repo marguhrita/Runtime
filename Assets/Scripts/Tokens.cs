@@ -15,6 +15,7 @@ public enum TokenType
     LCURLY,
     ASSIGN,
     EOF,
+    COMMA,
 
     // FUNCTIONAL KEYWORDS
     VAR,
@@ -28,10 +29,10 @@ public enum TokenType
 
 public class Token
 {
-    public TokenType token;
+    public TokenType type;
     public object value; // trust me bro 
 
-    public Token(TokenType token, object value = null) { this.token = token; this.value = value; }
+    public Token(TokenType token, object value = null) { this.type = token; this.value = value; }
 
     public override string ToString()
     {

@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Net.NetworkInformation;
 
 public enum NodeType
 {
     Call,
     Assign,
     StringVar,
-    IntVar
+    IntVar,
+    Literal
 }
 
 
@@ -24,8 +26,8 @@ public abstract class Node
 public class Call : Node
 {
     public string identifier;
-    public List<string> args;
-    Call(string identifier, List<string> args) : base(NodeType.Call) { this.identifier = identifier; this.args = args; }
+    public List<Node> args;
+    Call(string identifier, List<Node> args) : base(NodeType.Call) { this.identifier = identifier; this.args = args; }
 }
 
 public class StringVar : Node
@@ -49,5 +51,32 @@ public class IntVar : Node
     {
         this.identifier = identifier;
         this.data = data;
+    }
+}
+
+public abstract class Literal<T> : Node
+{
+    public T value;
+    protected Literal(T value) : base(NodeType.Literal)
+    {
+        this.value = value;
+    }
+}
+
+public class IntLit : Literal<int>
+{   
+    public IntLit(int value) : base(value){}
+}
+
+public class Assign : Node
+{
+    public string identifier;
+    public int data;
+
+    Assign(string identifier, int data) : base(NodeType.Assign)
+    {
+        this.identifier = identifier;
+        this.data = data;
+
     }
 }
