@@ -66,23 +66,21 @@ public class ThirdPersonController : MonoBehaviour
         currentZoom = Mathf.Lerp(currentZoom, targetZoom, Time.deltaTime * zoomLerpSpeed);
         orbital.Radius = currentZoom;
     }
-    
+
 
     void CursorManager()
-{
-        if (Mouse.current.rightButton.isPressed)
+    {
+        if (Mouse.current.rightButton.isPressed && cursorOn)
         {
             Cursor.lockState = CursorLockMode.Locked;
             camInput.enabled = true;
-            Debug.Log("Cursor Locked");
-
+            cursorOn = false;
         }
-        else
+        else if (! (Mouse.current.rightButton.isPressed || cursorOn)) // de morgans rule out in the wild no way
         {
             Cursor.lockState = CursorLockMode.None;
             camInput.enabled = false;
-
-            Debug.Log("Cursor Free");
+            cursorOn = true;
         }
 }
 
