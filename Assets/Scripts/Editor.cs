@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Rendering.BuiltIn.ShaderGraph;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Editor : MonoBehaviour
 {
@@ -26,28 +27,39 @@ public class Editor : MonoBehaviour
     public int FontSize => fontSize;
     private int lineCount = 0;
 
-    public GameObject editor;
+    [field: SerializeField] public GameObject EditorUI { get; private set; }
 
     [Header("Editor Options")]
     [SerializeField] private int fontSize;
-    [SerializeField] private TMP_Text lineNumbers;
-    [SerializeField] private TMP_Text codeText;
+    private TMP_Text lineNumbers;
+    private TMP_Text codeText;
 
 
-    void Start()
+    void Awake()
     {
         Singleton = this;
 
+        // Init editor vars
+        EditorUI = gameObject;
+
+        GameObject codeTextObject = transform.Find("Input/TextArea/Text").gameObject;
+        if (codeTextObject != null)
+        {
+            codeText = codeTextObject.GetComponent<TMP_Text>();
+        }
+
+
         // Match size of line numbers and codetext
-        lineNumbers.fontSize = fontSize;
+        //lineNumbers.fontSize = fontSize;
         //lineNumbers.text = "1";
         codeText.fontSize = fontSize;
 
-        editor = gameObject;
+        EditorUI.SetActive(false);
+
     }
 
     public void OnValueChanged(string text)
-    {
+    { 
         if (text.EndsWith("\n"))
         {
             Debug.Log("Newline detected!!");
@@ -73,7 +85,6 @@ public class Editor : MonoBehaviour
         // Parse the token list
         Parser p = new Parser();
         List<Node> nodes = p.Parse(tokens);
-        Debug.Log("sigma Boy");
         Debug.Log(nodes);
         foreach (Node n in nodes)
         {
