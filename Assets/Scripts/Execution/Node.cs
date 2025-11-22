@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Net.NetworkInformation;
 
+namespace AppleCore.Node;
 public enum NodeType
 {
     Call,
