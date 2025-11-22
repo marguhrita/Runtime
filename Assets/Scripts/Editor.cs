@@ -64,16 +64,17 @@ public class Editor : MonoBehaviour
     {
         Lexer l = new Lexer();
         List<Token> tokens = l.tokenize(codeText.text);
-        foreach (Token t in tokens)
-        {
-            Debug.Log(t.ToString());
-        }
+        // foreach (Token t in tokens)
+        // {
+        //     Debug.Log(t.ToString());
+        // }
 
 
         // Parse the token list
         Parser p = new Parser();
         List<Node> nodes = p.Parse(tokens);
-
+        Debug.Log("sigma Boy");
+        Debug.Log(nodes);
         foreach (Node n in nodes)
         {
             Debug.Log(n.ToString());

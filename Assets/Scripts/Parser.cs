@@ -14,7 +14,7 @@ public class Parser
         // Init tokens
         this.tokens = tokens;
 
-        List<Node> stmts = new List<Node>();
+        List<Node> stmts = Parse_stmts();
         List<Node> defs = new List<Node>();
 
         List<Node> combinedList = defs.Concat(stmts).ToList();
@@ -65,6 +65,10 @@ public class Parser
     private Node Parse_stmt()
     {
         // IF statements and whatnot
+        if (check(TokenType.IF))
+        {
+            
+        }
         return Parse_assign_and_expr();
     }
 

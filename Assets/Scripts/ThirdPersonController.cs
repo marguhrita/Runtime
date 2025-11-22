@@ -12,8 +12,9 @@ public class ThirdPersonController : MonoBehaviour
 
     [SerializeField] PlayerInput _playerInput;
 
-    private CinemachineCamera cam;
+    [SerializeField] private CinemachineCamera cam;
     private CinemachineOrbitalFollow orbital;
+    private CinemachineInputAxisController camInput;
     private Vector2 scrollDelta;
 
     private float targetZoom;
@@ -21,10 +22,13 @@ public class ThirdPersonController : MonoBehaviour
 
     private InputAction _scroll;
 
-    void Start(){
+    private bool cursorOn = true;
 
-        Cursor.lockState = CursorLockMode.Locked;
+    void Start()
+    {
+
         orbital = cam.GetComponent<CinemachineOrbitalFollow>();
+        camInput = cam.GetComponent<CinemachineInputAxisController>();
         targetZoom = currentZoom = orbital.Radius;
         _scroll = _playerInput.actions["MouseZoom"];
 
@@ -32,8 +36,22 @@ public class ThirdPersonController : MonoBehaviour
 
 
 
-    void Update(){
-        
+    void Update()
+    {
+
+        CursorManager();
+
+
+        if (_scroll == null)
+        {
+            //Debug.LogError("MouseZoom action not found!");
+            Debug.Log("Available actions:");
+            foreach (var action in _playerInput.actions)
+            {
+                Debug.Log("- " + action.name);
+            }
+        }
+
         scrollDelta = _scroll.ReadValue<Vector2>();
 
 
@@ -48,4 +66,26 @@ public class ThirdPersonController : MonoBehaviour
         currentZoom = Mathf.Lerp(currentZoom, targetZoom, Time.deltaTime * zoomLerpSpeed);
         orbital.Radius = currentZoom;
     }
+    
+
+    void CursorManager()
+{
+        if (Mouse.current.rightButton.isPressed)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            camInput.enabled = true;
+            Debug.Log("Cursor Locked");
+
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            camInput.enabled = false;
+
+            Debug.Log("Cursor Free");
+        }
 }
+
+}
+
+

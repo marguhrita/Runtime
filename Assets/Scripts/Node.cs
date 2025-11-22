@@ -20,6 +20,8 @@ public abstract class Node
     {
         this.type = type;
     }
+
+    
 }
 
 
@@ -28,6 +30,11 @@ public class Call : Node
     public string identifier;
     public List<Node> args;
     public Call(string identifier, List<Node> args) : base(NodeType.Call) { this.identifier = identifier; this.args = args; }
+
+    public override string ToString()
+    {
+        return  $"Node({this.type}, call_id: {this.identifier?.ToString() ?? "null"}, args = {args.ToString()})";
+    }
 }
 
 public class StringVar : Node
