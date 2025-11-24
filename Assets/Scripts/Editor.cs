@@ -28,12 +28,19 @@ public class Editor : MonoBehaviour
     public int FontSize => fontSize;
     private int lineCount = 0;
 
-    [field: SerializeField] public GameObject EditorUI { get; private set; }
+    [SerializeField] public GameObject EditorUI { get; private set; }
 
     [Header("Editor Options")]
     [SerializeField] private int fontSize;
     private TMP_Text lineNumbers;
     private TMP_Text codeText;
+
+    public Programmable currentObject { get; private set; } // The gameobject currently being programmed
+    public  bool programmingLock { get; private set; } = false;
+
+    // Compiling stuff
+    Lexer l = new Lexer();
+    Parser p = new Parser();
 
 
     void Awake()
@@ -59,35 +66,29 @@ public class Editor : MonoBehaviour
     { 
         if (text.EndsWith("\n"))
         {
-            Debug.Log("Newline detected!!");
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 lineNumbers.text += "\n" + lineCount;
                 lineCount += 1;
             }
         }
-
     }
-    
+
+    public void SetProgrammingObject(Programmable obj)
+    {
+        currentObject = obj;
+        programmingLock = true;
+    }
+
     public void submit()
     {
-        Lexer l = new Lexer();
         List<Token> tokens = l.tokenize(codeText.text);
-        // foreach (Token t in tokens)
-        // {
-        //     Debug.Log(t.ToString());
-        // }
 
-
-        // Parse the token list
         Parser p = new Parser();
         List<Node> nodes = p.Parse(tokens);
-        Debug.Log(nodes);
-        foreach (Node n in nodes)
-        {
-            Debug.Log(n.ToString());
-        }
 
         gameObject.SetActive(false);
+        currentObject.Content = codeText.text;
+        currentObject.Nodes = nodes;        // Store the nodes in the current object
     }
 }
