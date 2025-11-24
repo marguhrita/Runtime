@@ -2,16 +2,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using AppleCore.Node;
 public class Programmable : MonoBehaviour
 {
-    public List<Nodes
+    public List<Node> Nodes { get; set; }
     void OnMouseDown()
     {
-        Debug.Log("sigma nuts");
-        
         Editor.Singleton.EditorUI.SetActive(true);
-        
     }
 
 
