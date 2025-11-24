@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering.BuiltIn.ShaderGraph;
 using UnityEngine;
 using UnityEngine.UI;
+using AppleCore.Node;
 
 public class Editor : MonoBehaviour
 {
@@ -48,10 +49,6 @@ public class Editor : MonoBehaviour
             codeText = codeTextObject.GetComponent<TMP_Text>();
         }
 
-
-        // Match size of line numbers and codetext
-        //lineNumbers.fontSize = fontSize;
-        //lineNumbers.text = "1";
         codeText.fontSize = fontSize;
 
         EditorUI.SetActive(false);
