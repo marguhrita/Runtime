@@ -7,7 +7,7 @@ public class Programmable : MonoBehaviour
     public string Content{ get; set; }
     void OnMouseDown()
     {
-        Editor.Singleton.EditorUI.SetActive(true);
+        GameManager.Singleton.EditorUI.SetActive(true);
         Editor.Singleton.SetProgrammingObject(this);
     }
 
