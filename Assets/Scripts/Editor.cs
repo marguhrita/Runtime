@@ -38,8 +38,8 @@ public class Editor : MonoBehaviour
     public  bool programmingLock { get; private set; } = false;
 
     // Compiling stuff
-    Lexer l = new Lexer();
-    Parser p = new Parser();
+    Lexer l = new();
+    Parser p = new();
 
 
     void Awake()
@@ -55,7 +55,7 @@ public class Editor : MonoBehaviour
 
         codeText.fontSize = fontSize;
 
-        //EditorUI.SetActive(false);
+        // EditorUI.SetActive(false);
 
     }
 

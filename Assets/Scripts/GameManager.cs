@@ -1,5 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,7 +23,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public GameObject EditorUI;
 
-
+    void Update()
+    {
+       
+    }
 
     // TODO make a disable movement method
     void Start()
