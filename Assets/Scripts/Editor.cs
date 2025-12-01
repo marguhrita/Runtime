@@ -28,7 +28,6 @@ public class Editor : MonoBehaviour
     public int FontSize => fontSize;
     private int lineCount = 0;
 
-    [SerializeField] public GameObject EditorUI { get; private set; }
 
     [Header("Editor Options")]
     [SerializeField] private int fontSize;
@@ -47,8 +46,6 @@ public class Editor : MonoBehaviour
     {
         Singleton = this;
 
-        // Init editor vars
-        EditorUI = gameObject;
 
         GameObject codeTextObject = transform.Find("Input/TextArea/Text").gameObject;
         if (codeTextObject != null)
@@ -58,7 +55,7 @@ public class Editor : MonoBehaviour
 
         codeText.fontSize = fontSize;
 
-        EditorUI.SetActive(false);
+        //EditorUI.SetActive(false);
 
     }
 
@@ -80,12 +77,12 @@ public class Editor : MonoBehaviour
         programmingLock = true;
     }
 
-    public void submit()
+    public void Submit()
     {
         List<Token> tokens = l.tokenize(codeText.text);
-
-        Parser p = new Parser();
         List<Node> nodes = p.Parse(tokens);
+
+        Debug.Log("HALLO");
 
         gameObject.SetActive(false);
         currentObject.Content = codeText.text;

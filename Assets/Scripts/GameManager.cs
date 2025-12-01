@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [SerializeField] public GameObject EditorUI;
+
+
 
     // TODO make a disable movement method
     void Start()
