@@ -77,8 +77,6 @@ public class Parser
 
     private Node Parse_primary_expr()
     {
-
-
         if (check(TokenType.NUMBER))
         {
             Token t = match();
@@ -93,10 +91,10 @@ public class Parser
     // Needs to be sure it is a call here
     private Node Parse_call_expr()
     {
-        if (check(TokenType.ID))
+        if (check(TokenType.ID)) // identifiers
         {
             string id_name = (string)match().value;
-            if (check(TokenType.LPAR))
+            if (check(TokenType.LPAR)) // Function call
             {
                 match(); // Left Bracket
                 List<Node> args = Parse_args();
@@ -116,7 +114,12 @@ public class Parser
 
     private List<Node> Parse_args()
     {
-        List<Node> args = new List<Node>();
+        // Add the first arg, and then get repetitions
+        List<Node> args = new List<Node>
+        {
+            Parse_primary_expr()
+        };
+        args.Concat(Parse_argrep());
         return args;
     }
 
@@ -126,7 +129,7 @@ public class Parser
         {
             match();
             Node expr = Parse_primary_expr();
-            List<Node> argrep = Parse_argrep();
+            List<Node> argrep = Parse_argrep(); // recursion my beloved
             return new List<Node>() { expr }.Concat(argrep).ToList();
         }
 
