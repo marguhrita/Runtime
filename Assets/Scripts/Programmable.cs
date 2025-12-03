@@ -7,10 +7,12 @@ public class Programmable : MonoBehaviour
     public List<Node> Nodes { get; set; }
     public string Content { get; set; }
     private bool running;
+    public float duration;
 
     void Start()
     {
         running = false;
+        Debug.Log(gameObject.name + " script is running");
     }
 
     void OnMouseDown()
@@ -25,6 +27,8 @@ public class Programmable : MonoBehaviour
         {
             Debug.Log("PLAYER DETECTED!!!");
             running = true;
+            collision.transform.SetParent(transform);
+            Run();
         }
     }
 
@@ -32,29 +36,42 @@ public class Programmable : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("PLAYER DETECTED!!!");
-            running = false;
+            Debug.Log("PLAYER DETECTED out!!!");
+            collision.transform.SetParent(null);
+
         }
     }
 
     void Run()
     {
+        if (Nodes == null)
+        {
+            Debug.Log("No program");
+            return;
+        }
+
         if (Nodes.Count == 0)
         {
             Debug.Log("No nodes found");
+            return;
         }
 
+
+        Debug.Log("Running...");
         foreach (Node n in Nodes)
         {
+            Debug.Log(n.ToString());
             switch (n)
             {
                 case Call c:
+                    Debug.Log("Call detecc");
+                    Debug.Log(c.identifier);
                     switch (c)
                     {
-                        case var x when x.identifier == "Move":
+                        case var x when x.identifier == "move":
                             Debug.Log("Move");
                             break;
-                        case var x when x.identifier == "MoveX" || x.identifier == "MoveY" || x.identifier == "MoveZ":
+                        case var x when x.identifier == "movex" || x.identifier == "movey" || x.identifier == "movez":
                             if (x.args.Count != 1) // 1 argument checker
                             {
                                 Debug.LogError("Specific Move statement should only have one arg");
@@ -63,23 +80,24 @@ public class Programmable : MonoBehaviour
                             // Definitely a better way to do this somewhere
                             if (x.args[0] is IntLit val)
                             {
-                                if (x.identifier.EndsWith("X"))
+                                if (x.identifier.EndsWith("x"))
                                 {
-
+                                    Debug.Log("X");
+                                    Debug.Log(val.value);
                                     MoveObject((float)val.value, 0f, 0f);
                                 }
-                                else if (x.identifier.EndsWith("Y"))
+                                else if (x.identifier.EndsWith("y"))
                                 {
                                     MoveObject(0f, (float)val.value, 0f);
                                 }
-                                else if (x.identifier.EndsWith("Z"))
+                                else if (x.identifier.EndsWith("z"))
                                 {
                                     MoveObject(0f, 0f, (float)val.value);
                                 }
                             }
-                                
+
                             break;
-                            
+
                     }
                     break;
             }
@@ -90,8 +108,8 @@ public class Programmable : MonoBehaviour
     void MoveObject(float x, float y, float z)
     {
         Debug.Log("Moving");
-        Vector3 target = transform.position += new Vector3(x,y,z);
-        transform.DOMove(target, 1);
+        Vector3 target = transform.position + new Vector3(x,y,z);
+        transform.DOMove(target, duration); 
     }
 
 }
