@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using AppleCore.Node;
+using DG.Tweening;
 public class Programmable : MonoBehaviour
 {
     public List<Node> Nodes { get; set; }
@@ -88,7 +89,9 @@ public class Programmable : MonoBehaviour
 
     void MoveObject(float x, float y, float z)
     {
-        
+        Debug.Log("Moving");
+        Vector3 target = transform.position += new Vector3(x,y,z);
+        transform.DOMove(target, 1);
     }
 
 }
