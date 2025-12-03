@@ -80,7 +80,7 @@ public class Parser
         if (check(TokenType.NUMBER))
         {
             Token t = match();
-            return new IntLit((int)t.value);
+            return new IntLit(int.Parse(t.value.ToString()));
         }
 
         return Parse_call_expr();
