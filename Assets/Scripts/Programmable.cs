@@ -4,7 +4,7 @@ using AppleCore.Node;
 using DG.Tweening;
 public class Programmable : MonoBehaviour
 {
-    public List<Node> Nodes { get; set; }
+    public List<Node> Nodes { get; set; } = new List<Node>();
     public string Content { get; set; }
     private bool running;
     public float duration;
@@ -51,11 +51,11 @@ public class Programmable : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !running) // debounce
         {
             Debug.Log("PLAYER DETECTED!!!");
             running = true;
-            collision.transform.SetParent(transform);
+            collision.transform.SetParent(transform); // pretty sure this was to keep the fish on the platform
             Run();
         }
     }
@@ -122,6 +122,8 @@ public class Programmable : MonoBehaviour
                                 {
                                     MoveObject(0f, 0f, (float)val.value);
                                 }
+
+                                StartCoroutine(RunTimerReset());
                             }
 
                             break;
@@ -131,6 +133,13 @@ public class Programmable : MonoBehaviour
             }
         }
 
+    }
+
+    System.Collections.IEnumerator RunTimerReset()
+    {
+        yield return new WaitForSeconds(duration);
+        running = false;
+        Debug.Log("TImer REset!");
     }
 
     void MoveObject(float x, float y, float z)
