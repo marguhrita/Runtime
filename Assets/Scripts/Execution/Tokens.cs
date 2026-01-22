@@ -23,6 +23,10 @@ public enum TokenType
     IF,
     ID,
 
+    //Unary
+    NEGATE,
+    BANG, // logical not
+
     // Math
     MINUS
 }
