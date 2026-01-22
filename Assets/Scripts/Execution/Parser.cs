@@ -75,6 +75,11 @@ public class Parser
         return Parse_primary_expr();
     }
 
+    private Node Parse_Unary()
+    {
+        
+    }
+
     private Node Parse_primary_expr()
     {
         if (check(TokenType.NUMBER))
