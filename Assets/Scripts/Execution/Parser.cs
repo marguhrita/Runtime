@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AppleCore.Node;
+using UnityEditor.ShaderKeywordFilter;
 
 public class Parser
 {
@@ -72,12 +74,22 @@ public class Parser
     {
         // Do assigns at some point
 
-        return Parse_primary_expr();
+        return Parse_Unary();
     }
 
     private Node Parse_Unary()
     {
-        
+        Node primary_expr = Parse_primary_expr();
+        if (check(TokenType.NEGATE))
+        {
+            if (primary_expr is IntLit intLit) // make sure it is a number for the negate operator
+            {
+                return new IntLit(-intLit.value);
+            }
+        }
+
+        throw new Exception("Something went wrong parsing Unary...");
+
     }
 
     private Node Parse_primary_expr()
