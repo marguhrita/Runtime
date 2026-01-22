@@ -8,10 +8,20 @@ public class Programmable : MonoBehaviour
     public string Content { get; set; }
     private bool running;
     public float duration;
+    private Material platformMat;
+    private int colourID;
 
     void Start()
     {
         running = false;
+        platformMat = gameObject.GetComponent<Renderer>().material;
+        colourID = Shader.PropertyToID("_FresnelColor");
+
+        Debug.Log(platformMat.shader.name);
+
+        platformMat.SetColor(colourID, Color.rebeccaPurple);
+        platformMat.SetFloat("_FresnelNess", 10f);
+        
         Debug.Log(gameObject.name + " script is running");
     }
 
