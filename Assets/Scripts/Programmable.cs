@@ -8,21 +8,39 @@ public class Programmable : MonoBehaviour
     public string Content { get; set; }
     private bool running;
     public float duration;
+
+    // Shader Colours
     private Material platformMat;
     private int colourID;
+    private Color lastColour;
 
     void Start()
     {
         running = false;
+        Debug.Log(gameObject.name + " script is running");
+
+
+        // Shader Colours
         platformMat = gameObject.GetComponent<Renderer>().material;
         colourID = Shader.PropertyToID("_FresnelColor");
-
-        Debug.Log(platformMat.shader.name);
-
-        platformMat.SetColor(colourID, Color.rebeccaPurple);
         platformMat.SetFloat("_FresnelNess", 10f);
-        
-        Debug.Log(gameObject.name + " script is running");
+        lastColour = ChooseTargetColour();
+        platformMat.SetColor(colourID, lastColour); // init colour
+
+
+    }
+
+    void Update()
+    {
+        // Change colour of the platform if state changed
+        Color nextColour = ChooseTargetColour();
+        if (lastColour != nextColour)
+        {
+            lastColour = nextColour;
+
+            platformMat.SetColor(colourID, nextColour);
+
+        }
     }
 
     void OnMouseDown()
@@ -118,8 +136,16 @@ public class Programmable : MonoBehaviour
     void MoveObject(float x, float y, float z)
     {
         Debug.Log("Moving");
-        Vector3 target = transform.position + new Vector3(x,y,z);
-        transform.DOMove(target, duration); 
+        Vector3 target = transform.position + new Vector3(x, y, z);
+        transform.DOMove(target, duration);
+    }
+
+    private Color ChooseTargetColour()
+    {
+        if (Nodes.Count == 0) return Color.gray;
+        if (running) return Color.rebeccaPurple;
+        return Color.aquamarine;
+
     }
 
 }
