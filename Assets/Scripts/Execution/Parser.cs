@@ -79,13 +79,19 @@ public class Parser
 
     private Node Parse_Unary()
     {
-        Node primary_expr = Parse_primary_expr();
+
         if (check(TokenType.NEGATE))
         {
+            match(); // match negate
+            Node primary_expr = Parse_primary_expr();
             if (primary_expr is IntLit intLit) // make sure it is a number for the negate operator
             {
                 return new IntLit(-intLit.value);
             }
+        }
+        else
+        {
+            return Parse_primary_expr();
         }
 
         throw new Exception("Something went wrong parsing Unary...");
@@ -134,7 +140,7 @@ public class Parser
         // Add the first arg, and then get repetitions
         List<Node> args = new List<Node>
         {
-            Parse_primary_expr()
+            Parse_Unary()
         };
         args.Concat(Parse_argrep());
         return args;
@@ -145,7 +151,7 @@ public class Parser
         if (check(TokenType.COMMA))
         {
             match();
-            Node expr = Parse_primary_expr();
+            Node expr = Parse_Unary();
             List<Node> argrep = Parse_argrep(); // recursion my beloved
             return new List<Node>() { expr }.Concat(argrep).ToList();
         }

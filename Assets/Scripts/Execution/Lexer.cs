@@ -64,11 +64,12 @@ public class Lexer
             {
                 float num = scanner.peekFloat();
                 tokens.Add(new Token(TokenType.NUMBER, num));
+                // CHeck for minus in here
             }
             //math
-else if (c == '-')
+            else if (c == '-')
             {
-                tokens.Add(new Token(TokenType.MINUS));
+                tokens.Add(new Token(TokenType.NEGATE));
                 scanner.Consume();
             }
 
