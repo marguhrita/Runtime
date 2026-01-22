@@ -1,5 +1,4 @@
 using Unity.Cinemachine;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

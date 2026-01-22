@@ -1,6 +1,4 @@
-using System.ComponentModel;
-using System.Text;
-using System.Text.RegularExpressions;
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -65,6 +63,7 @@ public class Lexer
                 float num = scanner.peekFloat();
                 tokens.Add(new Token(TokenType.NUMBER, num));
                 // CHeck for minus in here
+
             }
             //math
             else if (c == '-')

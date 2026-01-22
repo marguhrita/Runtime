@@ -1,10 +1,6 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Rendering.BuiltIn.ShaderGraph;
 using UnityEngine;
-using UnityEngine.UI;
 using AppleCore.Node;
 
 public class Editor : MonoBehaviour
