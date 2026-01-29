@@ -45,6 +45,7 @@ public class Programmable : MonoBehaviour
 
     void OnMouseDown()
     {
+        Debug.Log("hello");
         GameManager.Singleton.EditorUI.SetActive(true);
         Editor.Singleton.SetProgrammingObject(this);
     }

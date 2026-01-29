@@ -78,7 +78,7 @@ public class Editor : MonoBehaviour
         List<Token> tokens = l.tokenize(codeText.text);
         List<Node> nodes = p.Parse(tokens);
 
-        gameObject.SetActive(false);
+        GameManager.Singleton.EditorUI.SetActive(false);
         currentObject.Content = codeText.text;
         currentObject.Nodes = nodes;        // Store the nodes in the current object
 
