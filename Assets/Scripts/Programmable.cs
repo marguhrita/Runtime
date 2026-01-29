@@ -45,7 +45,6 @@ public class Programmable : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log("hello");
         GameManager.Singleton.EditorUI.SetActive(true);
         Editor.Singleton.SetProgrammingObject(this);
     }
@@ -55,9 +54,8 @@ public class Programmable : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !running) // debounce
         {
             Debug.Log("PLAYER DETECTED!!!");
-            running = true;
             collision.transform.SetParent(transform); // pretty sure this was to keep the fish on the platform
-            Run();
+            StartCoroutine(Run());
         }
     }
 
@@ -71,24 +69,25 @@ public class Programmable : MonoBehaviour
         }
     }
 
-    void Run()
+    System.Collections.IEnumerator Run()
     {
         if (Nodes == null)
         {
             Debug.Log("No program");
-            return;
+            yield break;;
         }
 
         if (Nodes.Count == 0)
         {
             Debug.Log("No nodes found");
-            return;
+            yield break;;
         }
 
 
         Debug.Log("Running...");
         foreach (Node n in Nodes)
         {
+            running = true;
             Debug.Log(n.ToString());
             switch (n)
             {
@@ -123,9 +122,11 @@ public class Programmable : MonoBehaviour
                                 {
                                     MoveObject(0f, 0f, (float)val.value);
                                 }
-                                
-                                StartCoroutine(ProcessMovement());
-                                
+
+
+                                StartCoroutine(RunTimerReset());
+                                yield return new WaitUntil(() => !running);
+      
                             }
 
                             break;
@@ -136,14 +137,6 @@ public class Programmable : MonoBehaviour
         }
 
     }
-
-    System.Collections.IEnumerator ProcessMovement()
-    {
-        StartCoroutine(RunTimerReset());
-
-        yield return new WaitUntil(() => !running);
-    }
-
 
     System.Collections.IEnumerator RunTimerReset()
     {
