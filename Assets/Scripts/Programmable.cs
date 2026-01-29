@@ -123,8 +123,9 @@ public class Programmable : MonoBehaviour
                                 {
                                     MoveObject(0f, 0f, (float)val.value);
                                 }
-
-                                StartCoroutine(RunTimerReset());
+                                
+                                StartCoroutine(ProcessMovement());
+                                
                             }
 
                             break;
@@ -135,6 +136,14 @@ public class Programmable : MonoBehaviour
         }
 
     }
+
+    System.Collections.IEnumerator ProcessMovement()
+    {
+        StartCoroutine(RunTimerReset());
+
+        yield return new WaitUntil(() => !running);
+    }
+
 
     System.Collections.IEnumerator RunTimerReset()
     {
