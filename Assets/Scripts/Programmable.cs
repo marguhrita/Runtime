@@ -18,6 +18,7 @@ public class Programmable : MonoBehaviour
     {
         running = false;
         Debug.Log(gameObject.name + " script is running");
+        Content = "";
 
 
         // Shader Colours

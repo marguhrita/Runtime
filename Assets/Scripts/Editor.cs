@@ -71,6 +71,8 @@ public class Editor : MonoBehaviour
     {
         currentObject = obj;
         programmingLock = true;
+
+        codeText.text = obj.Content;
     }
 
     public void Submit()
