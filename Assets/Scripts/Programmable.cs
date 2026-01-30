@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using AppleCore.Node;
 using DG.Tweening;
+using System;
 public class Programmable : MonoBehaviour
 {
     public List<Node> Nodes { get; set; } = new List<Node>();
     public string Content { get; set; }
     private bool running;
     public float duration;
+    public String PlatformName = "";
 
     // Shader Colours
     private Material platformMat;
@@ -48,6 +50,7 @@ public class Programmable : MonoBehaviour
     {
         GameManager.Singleton.EditorUI.SetActive(true);
         Editor.Singleton.SetProgrammingObject(this);
+        Debug.Log(PlatformName);
     }
 
     void OnCollisionEnter(Collision collision)

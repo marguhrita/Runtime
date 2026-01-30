@@ -6336,6 +6336,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontSize: 19
+  codeText: {fileID: 1776252768}
+  inputField: {fileID: 848455638}
 --- !u!114 &1035348678
 MonoBehaviour:
   m_ObjectHideFlags: 0

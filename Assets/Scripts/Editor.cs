@@ -28,7 +28,8 @@ public class Editor : MonoBehaviour
     [Header("Editor Options")]
     [SerializeField] private int fontSize;
     private TMP_Text lineNumbers;
-    private TMP_Text codeText;
+    public TMP_Text codeText;
+    public TMP_InputField inputField;
 
     public Programmable currentObject { get; private set; } // The gameobject currently being programmed
     public  bool programmingLock { get; private set; } = false;
@@ -43,11 +44,12 @@ public class Editor : MonoBehaviour
         Singleton = this;
 
 
-        GameObject codeTextObject = transform.Find("Input/TextArea/Text").gameObject;
-        if (codeTextObject != null)
-        {
-            codeText = codeTextObject.GetComponent<TMP_Text>();
-        }
+        // GameObject codeTextObject = transform.Find("Input/TextArea/Text").gameObject;
+        // if (codeTextObject != null)
+        // {
+        //     codeText = codeTextObject.GetComponent<TMP_Text>();
+        // }
+        // inputField = GetComponentInChildren<TMP_InputField>();
 
         codeText.fontSize = fontSize;
 
@@ -70,9 +72,21 @@ public class Editor : MonoBehaviour
     public void SetProgrammingObject(Programmable obj)
     {
         currentObject = obj;
-        programmingLock = true;
+        // programmingLock = true;
 
-        codeText.text = obj.Content;
+        codeText.SetText(obj.Content);
+        inputField.text = obj.Content;
+
+        Debug.Log(obj.PlatformName);
+        Debug.Log(obj.Content);
+
+        codeText.SetText("Sigma Poopoo");
+
+        Debug.Log(codeText.text);
+
+        Debug.Log($"Is codeText null? {codeText == null}. Is it active? {codeText.gameObject.activeInHierarchy}");
+
+
     }
 
     public void Submit()
@@ -80,9 +94,11 @@ public class Editor : MonoBehaviour
         List<Token> tokens = l.tokenize(codeText.text);
         List<Node> nodes = p.Parse(tokens);
 
-        GameManager.Singleton.EditorUI.SetActive(false);
-        currentObject.Content = codeText.text;
+        currentObject.Content = inputField.text;
+        // codeText.SetText("");
         currentObject.Nodes = nodes;        // Store the nodes in the current object
+        GameManager.Singleton.EditorUI.SetActive(false);
+
 
         foreach (Node n in nodes)
         {
