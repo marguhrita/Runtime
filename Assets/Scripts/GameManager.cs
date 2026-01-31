@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -22,10 +22,14 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] public GameObject EditorUI;
+    [SerializeField] public GameObject Player;
 
     void Update()
     {
-       
+        if (Player.transform.position.y <= -100)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     // TODO make a disable movement method

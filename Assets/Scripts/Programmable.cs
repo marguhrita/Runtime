@@ -6,7 +6,7 @@ using System;
 public class Programmable : MonoBehaviour
 {
     public List<Node> Nodes { get; set; } = new List<Node>();
-    public string Content { get; set; }
+    public string Content;
     private bool running;
     public float duration;
     public String PlatformName = "";
@@ -20,7 +20,7 @@ public class Programmable : MonoBehaviour
     {
         running = false;
         Debug.Log(gameObject.name + " script is running");
-        Content = "";
+        
 
 
         // Shader Colours
@@ -48,6 +48,7 @@ public class Programmable : MonoBehaviour
 
     void OnMouseDown()
     {
+        Debug.Log("hello??");
         GameManager.Singleton.EditorUI.SetActive(true);
         Editor.Singleton.SetProgrammingObject(this);
         Debug.Log(PlatformName);
