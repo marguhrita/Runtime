@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 10
+  version: 5
 --- !u!114 &-444729935393478248
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -37,16 +37,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Water_01
-  m_Shader: {fileID: -6465566751694194690, guid: 0eaae29f371926a4fb41ee2ce13d0bf3,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 0eaae29f371926a4fb41ee2ce13d0bf3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _ALPHATEST_ON
   - _DISABLE_SSR_TRANSPARENT
   - _ENABLE_FOG_ON_TRANSPARENT
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords:
-  - _ALPHATEST_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -116,7 +115,6 @@ Material:
     - _B: 1
     - _Blend: 0
     - _BlendMode: 0
-    - _BlendModePreserveSpecular: 0
     - _CastShadows: 1
     - _ConservativeDepthOffsetEnable: 0
     - _Cull: 2
@@ -128,18 +126,13 @@ Material:
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
-    - _DstBlend2: 10
     - _EmissiveSpeed: 0.5
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
-    - _ExcludeFromTUAndAA: 0
     - _HeightFrequency: 3500
-    - _MaterialID: 1
-    - _MaterialTypeMask: 2
     - _NormalStrength: 0.3
     - _Opacity: 1
     - _OpaqueCullMode: 2
-    - _PerPixelSorting: 0
     - _QueueControl: 1
     - _QueueOffset: 0
     - _RayTracing: 0
@@ -157,14 +150,13 @@ Material:
     - _StencilRefGBuffer: 2
     - _StencilRefMV: 32
     - _StencilWriteMask: 6
-    - _StencilWriteMaskDepth: 9
+    - _StencilWriteMaskDepth: 8
     - _StencilWriteMaskDistortionVec: 4
-    - _StencilWriteMaskGBuffer: 15
-    - _StencilWriteMaskMV: 41
+    - _StencilWriteMaskGBuffer: 14
+    - _StencilWriteMaskMV: 40
     - _SupportDecals: 1
     - _Surface: 1
     - _SurfaceType: 1
-    - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -184,11 +176,9 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - Color_1: {r: 0.490196, g: 0.3215686, b: 0, a: 0.6392157}
-    - Color_13ec232c958d4c648c90624257c5b37c: {r: 0.5849056, g: 0.52562463, b: 0.43867922,
-        a: 0.9490196}
+    - Color_13ec232c958d4c648c90624257c5b37c: {r: 0.5849056, g: 0.52562463, b: 0.43867922, a: 0.9490196}
     - Color_21fed8c222a347c79b773bdea87c50cb: {r: 1, g: 1, b: 1, a: 0}
-    - Color_35a38b55f4c144bd891ce06b7562e933: {r: 0.49056596, g: 0.32310155, b: 0,
-        a: 0.74509805}
+    - Color_35a38b55f4c144bd891ce06b7562e933: {r: 0.49056596, g: 0.32310155, b: 0, a: 0.74509805}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
