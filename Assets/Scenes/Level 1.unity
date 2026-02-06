@@ -6078,6 +6078,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090650157}
   m_CullTransparentMesh: 1
+--- !u!1 &1127151593 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2151960907696171104, guid: 530b5191738647941a675b467d62038a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4160371671980682646}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1137239575
 Mesh:
   m_ObjectHideFlags: 0
@@ -7618,7 +7624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EditorUI: {fileID: 1452805378}
-  Player: {fileID: 0}
+  Player: {fileID: 1127151593}
 --- !u!4 &1667622137
 Transform:
   m_ObjectHideFlags: 0
@@ -8880,6 +8886,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cube (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8041153005655926020, guid: 191d7f3dccb2e9542b4f4931738e4f2a,
+        type: 3}
+      propertyPath: nextScene
+      value: Level 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
