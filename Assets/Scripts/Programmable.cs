@@ -6,7 +6,8 @@ using System;
 public class Programmable : MonoBehaviour
 {
     public List<Node> Nodes { get; set; } = new List<Node>();
-    public string Content;
+    [TextArea(4,10)]
+    [SerializeField] public string Content;
     private bool running;
     public float duration;
     public String PlatformName = "";
