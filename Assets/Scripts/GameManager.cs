@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 
 public class GameManager : MonoBehaviour
@@ -23,6 +24,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public GameObject EditorUI;
     [SerializeField] public GameObject Player;
+    [SerializeField] public BooleanObject[] BooleanGameObjects;
+    public Dictionary<string, bool> BoolDict;
+
 
     void Update()
     {
@@ -36,6 +40,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _singleton = this;
+        SerializeBoolDict();
+    }
+
+    void SerializeBoolDict()
+    {
+        BoolDict = new Dictionary<string, bool>();
+        foreach (BooleanObject b in BooleanGameObjects)
+        {
+            BoolDict[b.Name] = b.Value;
+        }
     }
 
 }

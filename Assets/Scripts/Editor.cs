@@ -82,7 +82,7 @@ public class Editor : MonoBehaviour
 
         codeText.SetText("Sigma Poopoo");
 
-        Debug.Log(codeText.text);
+        // Debug.Log(codeText.text);
 
         Debug.Log($"Is codeText null? {codeText == null}. Is it active? {codeText.gameObject.activeInHierarchy}");
 

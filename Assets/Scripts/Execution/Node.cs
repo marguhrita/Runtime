@@ -39,6 +39,11 @@ namespace AppleCore.Node
             this.condition = condition;
             this.body = body;
         }
+
+         public override string ToString()
+        {
+            return $"Node({this.condition.ToString()}, args = {body.ToString()})";
+        }
     }
 
 

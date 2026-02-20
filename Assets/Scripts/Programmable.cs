@@ -3,6 +3,7 @@ using UnityEngine;
 using AppleCore.Node;
 using DG.Tweening;
 using System;
+using System.IO.Compression;
 public class Programmable : MonoBehaviour
 {
     public List<Node> Nodes { get; set; } = new List<Node>();
@@ -80,13 +81,13 @@ public class Programmable : MonoBehaviour
         if (Nodes == null)
         {
             Debug.Log("No program");
-            yield break;;
+            yield break;
         }
 
         if (Nodes.Count == 0)
         {
             Debug.Log("No nodes found");
-            yield break;;
+            yield break;
         }
 
 
@@ -132,13 +133,30 @@ public class Programmable : MonoBehaviour
 
                                 StartCoroutine(RunTimerReset());
                                 yield return new WaitUntil(() => !running);
-      
+
                             }
 
                             break;
+                            
 
                     }
-                    break;
+                
+                break;
+                case IfStmt i:
+                    Debug.Log("IF Statement Detected");
+                    switch (i)
+                    {
+                        case var x when x.condition is Var:
+                            Debug.Log("Variable in the condition!");
+                            if (x.condition is Var v)
+                            {
+                                bool cond = GameManager.Singleton.BoolDict[v.identifier];
+                                Debug.Log("Got condition!: " + cond.ToString());
+                            }
+                            break;
+                    }
+
+                break;
             }
         }
 
