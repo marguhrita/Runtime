@@ -12,7 +12,7 @@ public class Scanner
 
     public Scanner(string code)
     {
-        this.Buf = new StringBuilder(code);
+        Buf = new StringBuilder(code);
     }
 
     public char? Peek()
