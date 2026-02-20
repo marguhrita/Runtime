@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         SerializeBoolDict();
     }
 
-    void SerializeBoolDict()
+    public void SerializeBoolDict()
     {
         BoolDict = new Dictionary<string, bool>();
         foreach (BooleanObject b in BooleanGameObjects)
