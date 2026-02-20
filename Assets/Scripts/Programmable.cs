@@ -62,7 +62,7 @@ public class Programmable : MonoBehaviour
         {
             Debug.Log("PLAYER DETECTED!!!");
             collision.transform.SetParent(transform); // pretty sure this was to keep the fish on the platform
-            StartCoroutine(Run());
+            StartCoroutine(Run(Nodes));
         }
     }
 
@@ -76,15 +76,9 @@ public class Programmable : MonoBehaviour
         }
     }
 
-    System.Collections.IEnumerator Run()
+    System.Collections.IEnumerator Run(List<Node> nodes)
     {
-        if (Nodes == null)
-        {
-            Debug.Log("No program");
-            yield break;
-        }
-
-        if (Nodes.Count == 0)
+        if (nodes == null || nodes.Count == 0)
         {
             Debug.Log("No nodes found");
             yield break;
@@ -92,7 +86,7 @@ public class Programmable : MonoBehaviour
 
 
         Debug.Log("Running...");
-        foreach (Node n in Nodes)
+        foreach (Node n in nodes)
         {
             running = true;
             Debug.Log(n.ToString());
@@ -152,6 +146,7 @@ public class Programmable : MonoBehaviour
                             {
                                 bool cond = GameManager.Singleton.BoolDict[v.identifier];
                                 Debug.Log("Got condition!: " + cond.ToString());
+                                yield return StartCoroutine(Run(i.body)); // runs the body of the IF statment
                             }
                             break;
                     }
@@ -159,8 +154,8 @@ public class Programmable : MonoBehaviour
                 break;
             }
         }
-
     }
+
 
     System.Collections.IEnumerator RunTimerReset()
     {
