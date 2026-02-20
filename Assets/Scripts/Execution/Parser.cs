@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AppleCore.Node;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class Parser
 {
@@ -58,17 +61,29 @@ public class Parser
         }
         return stmts;
     }
-
     private Node Parse_stmt()
     {
         // IF statements and whatnot
+        // if (Boolean Condition){
+        //     Body
+        // }
         if (check(TokenType.IF))
         {
-
+            match();
+            if (check(TokenType.LPAR))
+            { //(
+                match();
+                Node expr = Parse_expr();
+                if (expr is Var v)
+                {
+                    List<Node> stmts = new List<Node>();
+                    stmts = Parse_stmts();
+                    return new IfStmt()
+                }
+            }
         }
         return Parse_assign_and_expr();
     }
-
     private Node Parse_assign_and_expr()
     {
         // Do assigns at some point
@@ -94,24 +109,31 @@ public class Parser
         }
 
         throw new Exception("Something went wrong parsing Unary...");
-
     }
 
     private Node Parse_primary_expr()
     {
+        // Numbers
         if (check(TokenType.NUMBER))
         {
             Token t = match();
             return new IntLit(int.Parse(t.value.ToString()));
         }
 
-        return Parse_call_expr();
+        // Booleans
+        if (check(TokenType.BOOLEAN))
+        {
+            Token t = match();
+            return new BoolLit(t.value.ToString() == "True"); // Should only be True or False, so this is fine 💀
+        }
+
+        return Parse_expr();
 
     }
 
 
     // Needs to be sure it is a call here
-    private Node Parse_call_expr()
+    private Node Parse_expr()
     {
         if (check(TokenType.ID)) // identifiers
         {
@@ -124,11 +146,16 @@ public class Parser
                 match(); // Right Bracket
                 return new Call(id_name, args);
             }
+            else // Should be a variable
+            {
+                match();
+                return new Var(id_name);
+            }
         }
         else
         {
             Token t = peek();
-            throw new System.Exception($"Expected Function Call. got {t.type}");
+            throw new Exception($"Expected Function Call. got {t.type}");
         }
 
         return null; // This should never happen (please)

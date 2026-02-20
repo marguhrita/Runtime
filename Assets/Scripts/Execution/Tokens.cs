@@ -6,6 +6,7 @@ public enum TokenType
     // Literal Types
     STRING,
     NUMBER,
+    BOOLEAN,
 
     // Syntax things
     LPAR, //(

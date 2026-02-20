@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Net.NetworkInformation;
+using Unity.Android.Gradle.Manifest;
 
 namespace AppleCore.Node
 {
@@ -8,9 +10,11 @@ namespace AppleCore.Node
     {
         Call,
         Assign,
-        StringVar,
-        IntVar,
-        Literal
+        // StringVar,
+        // IntVar,
+        Literal,
+        IfStmt,
+        Var
     }
 
 
@@ -23,7 +27,20 @@ namespace AppleCore.Node
             this.type = type;
         }
 
-    
+    }
+
+    public class IfStmt : Node
+    {
+        public string identifier;
+        public string condition;
+        public List<Node> body;
+
+        public IfStmt(string identifier, string b, List<Node> body) : base(NodeType.IfStmt)
+        {
+            this.identifier = identifier;
+            this.condition = b;
+            this.body = body;
+        }
     }
 
 
@@ -35,31 +52,40 @@ namespace AppleCore.Node
 
         public override string ToString()
         {
-            return  $"Node({this.type}, call_id: {this.identifier?.ToString() ?? "null"}, args = {args.ToString()})";
+            return $"Node({this.type}, call_id: {this.identifier?.ToString() ?? "null"}, args = {args.ToString()})";
         }
     }
 
-    public class StringVar : Node
+    // public class StringVar : Node
+    // {
+    //     public string identifier;
+    //     public string data;
+
+    //     StringVar(string identifier, string data) : base(NodeType.StringVar)
+    //     {
+    //         this.identifier = identifier;
+    //         this.data = data;
+    //     }
+    // }
+
+    // public class IntVar : Node
+    // {
+    //     public string identifier;
+    //     public string data;
+
+    //     IntVar(string identifier, string data) : base(NodeType.IntVar)
+    //     {
+    //         this.identifier = identifier;
+    //         this.data = data;
+    //     }
+    // }
+
+    public class Var : Node
     {
         public string identifier;
-        public string data;
-
-        StringVar(string identifier, string data) : base(NodeType.StringVar)
+        public Var(string identifier) : base(NodeType.Var)
         {
             this.identifier = identifier;
-            this.data = data;
-        }
-    }
-
-    public class IntVar : Node
-    {
-        public string identifier;
-        public string data;
-
-        IntVar(string identifier, string data) : base(NodeType.IntVar)
-        {
-            this.identifier = identifier;
-            this.data = data;
         }
     }
 
@@ -80,6 +106,11 @@ namespace AppleCore.Node
     public class StrLit : Literal<string>
     {   
         public StrLit(string value) : base(value){}
+    }
+    
+    public class BoolLit : Literal<bool>
+    {   
+        public BoolLit(bool value) : base(value){}
     }
 
 

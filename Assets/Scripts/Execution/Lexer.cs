@@ -76,17 +76,21 @@ public class Lexer
             {
 
                 string name = scanner.peekWord().ToLower();
-                if (name == "variable")
+                if (name == "True" || name == "False")
                 {
-                    tokens.Add(new Token(TokenType.VAR, "variable"));
+                    tokens.Add(new Token(TokenType.BOOLEAN, name));
+                }
+                else if (name == "variable")
+                {
+                    tokens.Add(new Token(TokenType.VAR, name));
                 }
                 else if (name == "function")
                 {
-                    tokens.Add(new Token(TokenType.FUNCTION, "function"));
+                    tokens.Add(new Token(TokenType.FUNCTION, name));
                 }
                 else if (name == "if")
                 {
-                    tokens.Add(new Token(TokenType.IF, "if"));
+                    tokens.Add(new Token(TokenType.IF, name));
                 }
                 else
                 {
