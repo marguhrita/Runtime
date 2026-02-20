@@ -31,14 +31,12 @@ namespace AppleCore.Node
 
     public class IfStmt : Node
     {
-        public string identifier;
-        public string condition;
+        public Node condition;
         public List<Node> body;
 
-        public IfStmt(string identifier, string b, List<Node> body) : base(NodeType.IfStmt)
+        public IfStmt(Node condition, List<Node> body) : base(NodeType.IfStmt)
         {
-            this.identifier = identifier;
-            this.condition = b;
+            this.condition = condition;
             this.body = body;
         }
     }

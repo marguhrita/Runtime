@@ -74,12 +74,9 @@ public class Parser
             { //(
                 match();
                 Node expr = Parse_expr();
-                if (expr is Var v)
-                {
-                    List<Node> stmts = new List<Node>();
-                    stmts = Parse_stmts();
-                    return new IfStmt()
-                }
+                _ = new List<Node>();
+                List<Node> stmts = Parse_stmts();
+                return new IfStmt(expr, stmts);
             }
         }
         return Parse_assign_and_expr();
