@@ -42,7 +42,7 @@ namespace AppleCore.Node
 
          public override string ToString()
         {
-            return $"Node({this.condition.ToString()}, args = {body.ToString()})";
+            return $"Node({this.condition.ToString()}, args = {body})";
         }
     }
 

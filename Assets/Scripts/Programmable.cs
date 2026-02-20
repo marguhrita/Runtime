@@ -146,7 +146,10 @@ public class Programmable : MonoBehaviour
                             {
                                 bool cond = GameManager.Singleton.BoolDict[v.identifier];
                                 Debug.Log("Got condition!: " + cond.ToString());
-                                yield return StartCoroutine(Run(i.body)); // runs the body of the IF statment
+                                if (cond){
+                                    Debug.Log(i.body[0]);
+                                    yield return StartCoroutine(Run(i.body)); // runs the body of the IF statment
+                                }
                             }
                             break;
                     }

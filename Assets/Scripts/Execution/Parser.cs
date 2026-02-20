@@ -75,8 +75,17 @@ public class Parser
                 match();
                 Node expr = Parse_expr();
                 _ = new List<Node>();
-                List<Node> stmts = Parse_stmts();
-                return new IfStmt(expr, stmts);
+                if (check(TokenType.LCURLY))
+                {
+                    match(); // Match {
+                    List<Node> stmts = Parse_stmts();
+                    if (check(TokenType.RCURLY))
+                    {
+                        match(); // Match }
+                        return new IfStmt(expr, stmts);
+                    }
+                }
+                
             }
         }
         return Parse_assign_and_expr();
