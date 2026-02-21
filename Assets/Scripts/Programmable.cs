@@ -56,6 +56,11 @@ public class Programmable : MonoBehaviour
         Debug.Log(PlatformName);
     }
 
+    void OnMouseOver()
+    {
+        
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") && !running) // debounce
@@ -146,9 +151,11 @@ public class Programmable : MonoBehaviour
                             {
                                 bool cond = GameManager.Singleton.BoolDict[v.identifier];
                                 Debug.Log("Got condition!: " + cond.ToString());
-                                if (cond){
+                                if (cond)
+                                {
                                     Debug.Log(i.body[0]);
                                     yield return StartCoroutine(Run(i.body)); // runs the body of the IF statment
+                                    running = false;
                                 }
                             }
                             break;
