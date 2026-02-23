@@ -1,0 +1,10 @@
+BEGIN
+TITLE: PART 1
+
+NAME: Mysterious Figure
+
+Hey there - I'm your guide for today. Welcome to the backend of the city. It’s not pretty, but it’s where the real work gets done.
+See that platform? It’s hard-coded to stay still.
+Give it a click. That’ll pull up the source code. If we’re lucky, we can edit the parameters and actually get you across.
+/
+/
