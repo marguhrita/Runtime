@@ -24,8 +24,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Outline
-  m_Shader: {fileID: -6465566751694194690, guid: 461ebd9717e27604b9edfe3d405d6844,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 461ebd9717e27604b9edfe3d405d6844, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -136,11 +135,12 @@ Material:
     - _EnableFogOnTransparent: 1
     - _EnvironmentReflections: 1
     - _ExcludeFromTUAndAA: 0
-    - _FresnelNess: 3.64
+    - _FresnelNess: 200.7
     - _FresnelOn: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _GlowBrightness: 6.07
     - _MaterialID: 1
     - _MaterialTypeMask: 2
     - _Metallic: 0

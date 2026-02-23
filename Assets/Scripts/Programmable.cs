@@ -28,7 +28,6 @@ public class Programmable : MonoBehaviour
         // Shader Colours
         platformMat = gameObject.GetComponent<Renderer>().material;
         colourID = Shader.PropertyToID("_FresnelColor");
-        platformMat.SetFloat("_FresnelNess", 10f);
         lastColour = ChooseTargetColour();
         platformMat.SetColor(colourID, lastColour); // init colour
 
@@ -58,7 +57,14 @@ public class Programmable : MonoBehaviour
 
     void OnMouseOver()
     {
-        
+        platformMat.SetFloat("_FresnelNess", 200f);
+        platformMat.SetFloat("_GlowBrightness", 7f);
+    }
+
+    void OnMouseExit()
+    {
+        platformMat.SetFloat("_FresnelNess", 0f);
+        platformMat.SetFloat("_GlowBrightness", 0f);
     }
 
     void OnCollisionEnter(Collision collision)
