@@ -29,11 +29,11 @@ namespace Dossamer.Dialogue
                 Instance = this;
             }
 
-           
+
         }
 
         Queue<Speech> exchanges;
-        Queue<Line> dialogueLines; 
+        Queue<Line> dialogueLines;
         Speech _activeSpeech;
 
         public UnityEvent UOnDialogueStarted;
@@ -46,7 +46,7 @@ namespace Dossamer.Dialogue
         public delegate void DialogueEnded(Cutscene cutscene);
 
         public DialogueStarted OnDialogueStarted;
-        public DialogueEnded OnDialogueEnded; 
+        public DialogueEnded OnDialogueEnded;
         public DialogueLineProgressed OnDialogueLineProgressed;
         public DialogueSpeechProgressed OnDialogueSpeechProgressed;
 
@@ -84,9 +84,9 @@ namespace Dossamer.Dialogue
         public void SetIsProgressionFrozen(bool value)
         {
             // invokable from Unity Events in-editor. 
-            IsProgressionFrozen = value; 
+            IsProgressionFrozen = value;
         }
-        
+
         public bool GetIsDialogueActive()
         {
             return isDialogueActive;
@@ -104,7 +104,7 @@ namespace Dossamer.Dialogue
             if (isDialogueActive)
             {
                 isDialogueActive = false;
-                
+
                 OnDialogueEnded?.Invoke(_activeCutscene);
                 UOnDialogueEnded?.Invoke();
             }
@@ -116,7 +116,7 @@ namespace Dossamer.Dialogue
             exchanges = new Queue<Speech>(cutscene.Exchanges);
             dialogueLines = new Queue<Line>();
 
-            _activeCutscene = cutscene; 
+            _activeCutscene = cutscene;
 
             // cutscene.Pre?.Invoke();
 
@@ -125,7 +125,7 @@ namespace Dossamer.Dialogue
             OnDialogueStarted?.Invoke(cutscene);
             UOnDialogueStarted?.Invoke();
 
-            Debug.Log("started new dialogue"); 
+            Debug.Log("started new dialogue");
 
             UpdateDialogue(); // step through one line
 
@@ -159,10 +159,12 @@ namespace Dossamer.Dialogue
 
                 _portraitPanel.texture = _characterBank.CharacterMap[_activeSpeech.Speaker].Photo;
 
-                OnDialogueSpeechProgressed?.Invoke(_activeSpeech); 
+                OnDialogueSpeechProgressed?.Invoke(_activeSpeech);
 
                 UpdateDialogue();
-            } else {
+            }
+            else
+            {
                 Debug.Log("Falsed");
                 // close the dialogue
                 DialogueCanvas.SetActive(false);
@@ -171,7 +173,7 @@ namespace Dossamer.Dialogue
                 // _activeCutscene.Post?.Invoke();
                 OnDialogueEnded?.Invoke(_activeCutscene);
                 UOnDialogueEnded?.Invoke();
-                
+
                 // PlayerState.instance.UnfreezeInput();
             }
         }
@@ -203,6 +205,13 @@ namespace Dossamer.Dialogue
         //}
 
         public void ProgressDialogue(InputAction.CallbackContext context)
+        {
+            if (!IsProgressionFrozen && context.performed && DialogueManager.Instance.GetIsDialogueActive())
+            {
+                DialogueManager.Instance.UpdateDialogue();
+            }
+        }
+        public void ProgressDialogueEvent(InputAction.CallbackContext context)
         {
             if (!IsProgressionFrozen && context.performed && DialogueManager.Instance.GetIsDialogueActive())
             {
