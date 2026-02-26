@@ -28,6 +28,17 @@ public class PlayerController : MonoBehaviour
         _moveAction = _playerInput.actions["Move"];
     }
 
+    public bool isMoving()
+    {
+        Vector2 moveVec = _moveAction.ReadValue<Vector2>();
+        return moveVec.magnitude != 0;
+    }
+
+    public bool isJumping()
+    {
+        return _jumpAction.IsPressed() && velocity.y <= 4;
+    }
+
     void Update()
     {
 

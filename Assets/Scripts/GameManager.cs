@@ -40,7 +40,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _singleton = this;
+        if (BooleanGameObjects.Length != 0){
         SerializeBoolDict();
+
+        }
     }
 
     public void SerializeBoolDict()
