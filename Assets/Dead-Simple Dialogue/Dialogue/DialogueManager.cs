@@ -137,14 +137,12 @@ namespace Dossamer.Dialogue
             if (dialogueLines.Count > 0)
             {
                 Line line = dialogueLines.Dequeue(); // will return and remove oldest (first added) element
-                Debug.Log("THe line: " + line.Text);
 
                 _textPanel.TriggerNewText(line.Text);
 
                 OnDialogueLineProgressed?.Invoke(line);
                 UOnDialogueProgressed?.Invoke();
 
-                // Debug.Log(line.Text);
             }
             else if (exchanges.Count > 0)
             {
@@ -213,7 +211,7 @@ namespace Dossamer.Dialogue
         }
         public void ProgressDialogueEvent(InputAction.CallbackContext context)
         {
-            if (!IsProgressionFrozen && context.performed && DialogueManager.Instance.GetIsDialogueActive())
+            if (!IsProgressionFrozen && context.performed && DialogueManager.Instance.GetIsDialogueActive() && !_textPanel.IsBusy)
             {
                 DialogueManager.Instance.UpdateDialogue();
             }

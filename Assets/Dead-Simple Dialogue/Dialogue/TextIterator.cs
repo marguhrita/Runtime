@@ -17,6 +17,8 @@ namespace Dossamer.Dialogue
         [SerializeField]
         bool _shouldIterate = true;
 
+        public bool IsBusy { get; private set; }
+
         public delegate void TextDoneIterating();
         public TextDoneIterating OnTextDoneIterating;
 
@@ -42,6 +44,7 @@ namespace Dossamer.Dialogue
 
         IEnumerator IterateLetters(string text)
         {
+            IsBusy = true;
             _text.text = "";
 
             for (int i = 0; i < text.Length; i++)
@@ -61,7 +64,7 @@ namespace Dossamer.Dialogue
                 // this throws an index out of bounds error in webgl
                 // yield return new WaitForSeconds(_secondsToWait);
             }
-
+            IsBusy = false;
             OnTextDoneIterating?.Invoke();
         }
     }

@@ -5,6 +5,7 @@ using System;
 public class BooleanObject : MonoBehaviour
 {
     [SerializeField] public string Name;
+    [SerializeField] private Color MainColour;
     [SerializeField] public bool Value;
     [SerializeField] private Material mat;
     private Color lastColour;
@@ -22,7 +23,6 @@ public class BooleanObject : MonoBehaviour
     {
         colourID = Shader.PropertyToID("_BaseColor");
         lastColour = ChooseTargetColour();
-
     }
 
     void Update()
@@ -42,11 +42,11 @@ public class BooleanObject : MonoBehaviour
     {
         if (Value)
         {
-            return Color.green;
+            return MainColour;
         }
         else
         {
-            return Color.red;
+            return Color.gray1; // inactive
 
         }
 

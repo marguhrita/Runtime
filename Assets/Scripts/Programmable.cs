@@ -183,8 +183,16 @@ public class Programmable : MonoBehaviour
     void MoveObject(float x, float y, float z)
     {
         Debug.Log("Moving");
-        Vector3 target = transform.position + new Vector3(x, y, z);
-        transform.DOMove(target, duration);
+        try
+        {
+            Vector3 target = transform.position + new Vector3(x, y, z);
+            transform.DOMove(target, duration);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Error: {e.Message}");
+        }
+        
     }
 
     private Color ChooseTargetColour()
