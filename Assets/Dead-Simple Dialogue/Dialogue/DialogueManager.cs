@@ -28,6 +28,8 @@ namespace Dossamer.Dialogue
             {
                 Instance = this;
             }
+
+           
         }
 
         Queue<Speech> exchanges;
@@ -135,6 +137,7 @@ namespace Dossamer.Dialogue
             if (dialogueLines.Count > 0)
             {
                 Line line = dialogueLines.Dequeue(); // will return and remove oldest (first added) element
+                Debug.Log("THe line: " + line.Text);
 
                 _textPanel.TriggerNewText(line.Text);
 
@@ -151,13 +154,16 @@ namespace Dossamer.Dialogue
 
                 // UI update
                 _namePanel.text = _activeSpeech.Speaker;
+                DialogueCanvas.SetActive(true);
+                _characterBank.RefreshMap();
+
                 _portraitPanel.texture = _characterBank.CharacterMap[_activeSpeech.Speaker].Photo;
 
                 OnDialogueSpeechProgressed?.Invoke(_activeSpeech); 
 
                 UpdateDialogue();
-            } else { 
-
+            } else {
+                Debug.Log("Falsed");
                 // close the dialogue
                 DialogueCanvas.SetActive(false);
                 isDialogueActive = false;

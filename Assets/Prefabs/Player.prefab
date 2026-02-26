@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInput: {fileID: 2434767616251497367}
-  cameraTransform: {fileID: 8219023810729025195}
+  cameraTransform: {fileID: 0}
   speed: 5
   jumpHeight: 2
   gravity: -9.8
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2538519169404169011}
+  pc: {fileID: 1403567136733191136}
 --- !u!1 &5754646809825109018
 GameObject:
   m_ObjectHideFlags: 0
