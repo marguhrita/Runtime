@@ -17,13 +17,15 @@ public class BooleanObject : MonoBehaviour
     {
         Value = !Value;
         GameManager.Singleton.BoolDict[Name] = Value;
-        mat = GetComponent<Material>();
     }
 
     void Start()
     {
+        mat = GetComponent<Renderer>().material;
+
         colourID = Shader.PropertyToID("_BaseColor");
         lastColour = ChooseTargetColour();
+        mat.SetColor(colourID, lastColour);
     }
 
     void Update()
