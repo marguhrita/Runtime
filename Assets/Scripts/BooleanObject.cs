@@ -7,7 +7,7 @@ public class BooleanObject : MonoBehaviour
     [SerializeField] public string Name;
     [SerializeField] private Color MainColour;
     [SerializeField] public bool Value;
-    [SerializeField] private Material mat;
+    private Material mat;
     private Color lastColour;
     private int colourID;
 
@@ -17,6 +17,7 @@ public class BooleanObject : MonoBehaviour
     {
         Value = !Value;
         GameManager.Singleton.BoolDict[Name] = Value;
+        mat = GetComponent<Material>();
     }
 
     void Start()

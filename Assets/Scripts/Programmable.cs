@@ -17,6 +17,7 @@ public class Programmable : MonoBehaviour
     private Material platformMat;
     private int colourID;
     private Color lastColour;
+    private bool mouseOver;
 
     void Start()
     {
@@ -49,22 +50,36 @@ public class Programmable : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log("hello??");
         GameManager.Singleton.EditorUI.SetActive(true);
         Editor.Singleton.SetProgrammingObject(this);
         Debug.Log(PlatformName);
     }
 
-    void OnMouseOver()
+    private void lightUp(bool state)
     {
-        platformMat.SetFloat("_FresnelNess", 200f);
-        platformMat.SetFloat("_GlowBrightness", 7f);
-    }
-
-    void OnMouseExit()
-    {
+        if (state)
+        {
+            platformMat.SetFloat("_FresnelNess", 200f);
+            platformMat.SetFloat("_GlowBrightness", 7f);
+        }
+        else { 
         platformMat.SetFloat("_FresnelNess", 0f);
         platformMat.SetFloat("_GlowBrightness", 0f);
+
+        }
+    }
+
+    void OnMouseOver()
+    {
+        mouseOver = true;
+        lightUp(true);
+    }
+        
+    void OnMouseExit()
+    {
+        mouseOver = false;
+                lightUp(false);
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -161,8 +176,9 @@ public class Programmable : MonoBehaviour
                                 {
                                     Debug.Log(i.body[0]);
                                     yield return StartCoroutine(Run(i.body)); // runs the body of the IF statment
-                                    running = false;
+
                                 }
+                                running = false;
                             }
                             break;
                     }
@@ -197,8 +213,14 @@ public class Programmable : MonoBehaviour
 
     private Color ChooseTargetColour()
     {
+        if (Nodes.Count == 0 && mouseOver) return Color.green;
         if (Nodes.Count == 0) return Color.gray;
-        if (running) return Color.rebeccaPurple;
+        if (running)
+        {
+            lightUp(true);
+            return Color.rebeccaPurple;
+        }
+        lightUp(false);
         return Color.aquamarine;
 
     }

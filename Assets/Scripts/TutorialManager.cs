@@ -4,48 +4,69 @@ using Dossamer.Dialogue;
 using UnityEngine.InputSystem;
 using System.Data;
 using UnityEngine.UI;
-
+using Unity.Cinemachine;
 using System;
 using Unity.VisualScripting;
 using System.Collections;
 
 public class TutorialManager : MonoBehaviour
 {
-    [SerializeField] Cutscene cutscene;
-    [SerializeField] PlayerInput _playerInput;
-    [SerializeField] String[] TutorialSteps;
+    [SerializeField] Cutscene[] cutscenes;
+    [SerializeField] PlayerInput _playerInput;    
     [SerializeField] private RawImage progressionIndicator;
+    [SerializeField] private float delay;
+
+    [Header("Cameras")]
+    public CinemachineCamera playerCamera;
+    public CinemachineCamera panTargetCamera;
+    private int currentStep;
+    [SerializeField] private float cameraPanSpeed;
 
 
-    public void FirstTriggerEntered()
+
+    public void TriggerEntered(int CutsceneNumber)
     {
-        DialogueManager.Instance.StartNewDialogue(cutscene);
+        DialogueManager.Instance.StartNewDialogue(cutscenes[CutsceneNumber - 1]);
         _playerInput.actions["Attack"].performed += DialogueManager.Instance.ProgressDialogueEvent;
-        _playerInput.actions["Attack"].performed += DialogueManager.Instance.ProgressDialogueEvent;
-
         progressionIndicator.enabled = false;
-
     }
 
     void Start()
     {
         DialogueManager.Instance.TextPanel.OnTextDoneIterating += StepDone;
+        currentStep = 0;
     }
 
-    public void NextTutorialStep(float delay)
+    public void NextTutorialStep()
     {
-        StartCoroutine(showIndicator(delay));
+        progressionIndicator.enabled = false;
+        currentStep += 1;
     }
 
-    public IEnumerator showIndicator(float delay)
+    public IEnumerator showIndicator()
     {
         yield return new WaitForSeconds(delay);
-        progressionIndicator.enabled = false;
+        progressionIndicator.enabled = true;
+    }
+
+    void Update()
+    {
+        if (currentStep == 2)
+        {
+            panTargetCamera.Priority = 15;
+            panCamera(panTargetCamera);
+        }
+    }
+
+    void panCamera(CinemachineCamera cam)
+    {
+        cam.GetComponent<CinemachineOrbitalFollow>().HorizontalAxis.Value += Time.deltaTime * cameraPanSpeed;
     }
 
     void StepDone()
     {
-        progressionIndicator.enabled = true;
+        panTargetCamera.Priority = 0;
+        StartCoroutine(showIndicator());
     }
 
 }

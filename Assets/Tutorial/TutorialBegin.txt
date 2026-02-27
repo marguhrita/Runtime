@@ -1,10 +1,35 @@
 BEGIN
-TITLE: PART 1
+TITLE: TUTORIAL 1
 
-NAME: Mysterious Figure
+NAME: Mysterious Guy
 
 Hey there - I'm your guide for today. Welcome to the backend of the city. It’s not pretty, but it’s where the real work gets done.
-See that platform? It’s hard-coded to stay still.
-Give it a click. That’ll pull up the source code. If we’re lucky, we can edit the parameters and actually get you across.
+See that platform? It's already been coded with a MOVE function to move across that gap.
+Give it a click. That’ll pull up the source code.
+Press submit on the code to lock it in!
+/
+/
+
+TITLE: TUTORIAL 2
+
+NAME: Mysterious Guy
+
+Good job using the first platform!
+Now take a look at the next one.
+The move function can move in either the x, y or z directions
+The number in the brackets is how far it moves!
+/
+/
+
+TITLE: TUTORIAL 3
+
+NAME: Mysterious Guy
+
+Excellent work - you're way better than the last guy
+Platforms can take more than one MOVE function at a time!
+Take a look at the next platform - the platform works sequentially
+That means it will execute the move command at the top of the script first, before moving on to the rest of the code
+Give it a shot!
+
 /
 /
