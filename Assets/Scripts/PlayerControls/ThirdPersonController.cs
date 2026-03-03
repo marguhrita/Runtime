@@ -7,7 +7,7 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private float zoomSpeed = 2f;
     [SerializeField] private float zoomLerpSpeed = 10f;
     [SerializeField] private float minDistance = 3f;
-    [SerializeField] private float maxDistance = 15f;
+    [SerializeField] private float maxDistance = 9f;
 
     [SerializeField] PlayerInput _playerInput;
 

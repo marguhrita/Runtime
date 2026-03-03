@@ -4,6 +4,7 @@ using AppleCore.Node;
 using DG.Tweening;
 using System;
 using System.IO.Compression;
+using UnityEngine.InputSystem;
 public class Programmable : MonoBehaviour
 {
     public List<Node> Nodes { get; set; } = new List<Node>();
@@ -69,13 +70,13 @@ public class Programmable : MonoBehaviour
         }
     }
 
-    void OnMouseOver()
+    public void HoverEnter()
     {
         mouseOver = true;
         lightUp(true);
     }
         
-    void OnMouseExit()
+    public void HoverExit()
     {
         mouseOver = false;
                 lightUp(false);
@@ -213,7 +214,7 @@ public class Programmable : MonoBehaviour
 
     private Color ChooseTargetColour()
     {
-        if (Nodes.Count == 0 && mouseOver) return Color.green;
+        if (mouseOver) return Color.green;
         if (Nodes.Count == 0) return Color.gray;
         if (running)
         {
