@@ -23,10 +23,8 @@ public class Programmable : MonoBehaviour
     void Start()
     {
         running = false;
-        Debug.Log(gameObject.name + " script is running");
+        // Debug.Log(gameObject.name + " script is running");
         
-
-
         // Shader Colours
         platformMat = gameObject.GetComponent<Renderer>().material;
         colourID = Shader.PropertyToID("_FresnelColor");
@@ -49,12 +47,11 @@ public class Programmable : MonoBehaviour
         }
     }
 
-    void OnMouseDown()
-    {
-        GameManager.Singleton.EditorUI.SetActive(true);
-        Editor.Singleton.SetProgrammingObject(this);
-        Debug.Log(PlatformName);
-    }
+    // void OnMouseDown()
+    // {
+    //     GameManager.Singleton.EditorUI.SetActive(true);
+    //     Editor.Singleton.SetProgrammingObject(this);
+    // }
 
     private void lightUp(bool state)
     {
@@ -79,7 +76,7 @@ public class Programmable : MonoBehaviour
     public void HoverExit()
     {
         mouseOver = false;
-                lightUp(false);
+        lightUp(false);
 
     }
 
@@ -87,7 +84,7 @@ public class Programmable : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !running) // debounce
         {
-            Debug.Log("PLAYER DETECTED!!!");
+            // Debug.Log("PLAYER DETECTED!!!");
             collision.transform.SetParent(transform); // pretty sure this was to keep the fish on the platform
             StartCoroutine(Run(Nodes));
         }
@@ -97,7 +94,7 @@ public class Programmable : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("PLAYER DETECTED out!!!");
+            // Debug.Log("PLAYER DETECTED out!!!");
             collision.transform.SetParent(null);
 
         }
@@ -120,7 +117,7 @@ public class Programmable : MonoBehaviour
             switch (n)
             {
                 case Call c:
-                    Debug.Log("Call detecc");
+                    // Debug.Log("Call detecc");
                     Debug.Log(c.identifier);
                     switch (c)
                     {
@@ -164,7 +161,7 @@ public class Programmable : MonoBehaviour
                 
                 break;
                 case IfStmt i:
-                    Debug.Log("IF Statement Detected");
+                    // Debug.Log("IF Statement Detected");
                     switch (i)
                     {
                         case var x when x.condition is Var:
@@ -194,12 +191,12 @@ public class Programmable : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         running = false;
-        Debug.Log("TImer REset!");
+        // Debug.Log("TImer REset!");
     }
 
     void MoveObject(float x, float y, float z)
     {
-        Debug.Log("Moving");
+        // Debug.Log("Moving");
         try
         {
             Vector3 target = transform.position + new Vector3(x, y, z);
