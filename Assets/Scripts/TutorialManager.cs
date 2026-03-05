@@ -12,7 +12,7 @@ using System.Collections;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] Cutscene[] cutscenes;
-    [SerializeField] PlayerInput _playerInput;    
+    private PlayerInput _playerInput;    
     [SerializeField] private RawImage progressionIndicator;
     [SerializeField] private float delay;
 
@@ -27,6 +27,7 @@ public class TutorialManager : MonoBehaviour
     public void TriggerEntered(int CutsceneNumber)
     {
         DialogueManager.Instance.StartNewDialogue(cutscenes[CutsceneNumber - 1]);
+        _playerInput = GameManager.Singleton.playerInput;
         _playerInput.actions["Attack"].performed += DialogueManager.Instance.ProgressDialogueEvent;
         progressionIndicator.enabled = false;
     }

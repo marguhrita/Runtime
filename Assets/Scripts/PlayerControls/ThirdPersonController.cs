@@ -9,7 +9,7 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private float minDistance = 3f;
     [SerializeField] private float maxDistance = 9f;
 
-    [SerializeField] PlayerInput _playerInput;
+    PlayerInput _playerInput;
 
     [SerializeField] private CinemachineCamera cam;
     private CinemachineOrbitalFollow orbital;
@@ -25,7 +25,7 @@ public class ThirdPersonController : MonoBehaviour
 
     void Start()
     {
-
+        _playerInput = GameManager.Singleton.playerInput;
         orbital = cam.GetComponent<CinemachineOrbitalFollow>();
         camInput = cam.GetComponent<CinemachineInputAxisController>();
         targetZoom = currentZoom = orbital.Radius;

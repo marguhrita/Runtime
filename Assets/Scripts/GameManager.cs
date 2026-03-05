@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 
 public class GameManager : MonoBehaviour
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject Player;
     [SerializeField] public BooleanObject[] BooleanGameObjects;
     public Dictionary<string, bool> BoolDict;
+    public PlayerInput playerInput { get; private set; }
 
 
     void Update()
@@ -40,9 +42,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _singleton = this;
-        if (!BooleanGameObjects.IsUnityNull()){
-        SerializeBoolDict();
-
+        playerInput = Player.GetComponent<PlayerInput>();
+        if (!BooleanGameObjects.IsUnityNull())
+        {
+            SerializeBoolDict();
         }
     }
 

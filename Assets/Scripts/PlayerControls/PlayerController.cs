@@ -5,7 +5,7 @@ using UnityEngine.TextCore.Text;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] PlayerInput _playerInput;
+    PlayerInput _playerInput;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpHeight = 2f;
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        _playerInput = GameManager.Singleton.playerInput;
         _jumpAction = _playerInput.actions["Jump"];
         _moveAction = _playerInput.actions["Move"];
     }
