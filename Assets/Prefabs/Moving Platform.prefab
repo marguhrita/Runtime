@@ -122,5 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Content: movez(12)
+  Editable: 1
   duration: 5
   PlatformName: Start
