@@ -1,18 +1,18 @@
 BEGIN
-TITLE: TUTORIAL 1
+TITLE: 1:1
 
-NAME: Mysterious Guy
+NAME: Fish
 
-Hey there - I'm your guide for today. Welcome to the backend of the city. It’s not pretty, but it’s where the real work gets done.
+Hey there - I'm your guide for today. Welcome to the backend of the city.
 See that platform? It's already been coded with a MOVE function to move across that gap.
 Give it a click. That’ll pull up the source code.
 Press submit on the code to lock it in!
 /
 /
 
-TITLE: TUTORIAL 2
+TITLE: 1:2
 
-NAME: Mysterious Guy
+NAME: Fish
 
 Good job using the first platform!
 Now take a look at the next one.
@@ -21,15 +21,47 @@ The number in the brackets is how far it moves!
 /
 /
 
-TITLE: TUTORIAL 3
+TITLE: 1:3
 
-NAME: Mysterious Guy
+NAME: Fish
 
 Excellent work - you're way better than the last guy
 Platforms can take more than one MOVE function at a time!
-Take a look at the next platform - the platform works sequentially
+Take a look at the next platform - the code works sequentially
 That means it will execute the move command at the top of the script first, before moving on to the rest of the code
-Give it a shot!
+Try it out!
+
+/
+/
+
+TITLE: 2:1
+
+NAME: Fish
+
+Welcome to the next level!
+This time, let's try changing the code
+The "movex" command here doesn't move far enough!
+Try changing the number for a larger one
+/
+/
+
+TITLE: 2:2
+
+NAME: Fish
+
+Fantastical job.
+For the next platform, "x" is the wrong direction!
+Try changing the "movex" command to progress
+
+/
+/
+TITLE: 2:3
+
+NAME: Fish
+
+Took you long enough...
+You're on your own for this next one
+Good luck!
 
 /
 /
