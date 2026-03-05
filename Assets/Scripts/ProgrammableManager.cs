@@ -5,24 +5,36 @@ using UnityEngine.InputSystem;
 public class ProgrammableManager : MonoBehaviour
 {
 
-    [SerializeField] private LayerMask interactableLayer; 
-    [SerializeField] PlayerInput _playerInput;   
-    private GameObject lastHovered;
+    [SerializeField] private LayerMask platforms;
+    [SerializeField] private LayerMask boolObjs;
+
+    PlayerInput _playerInput;
+    private GameObject lastHoveredPlatform;
+    private GameObject lastHoveredBool;
+
     private bool tutorialActive = false;
     private bool onObject = false;
-    
+
 
     void Start()
     {
-        _playerInput.actions["Attack"].performed += ProgrammableClicked;
+        _playerInput = GameManager.Singleton.playerInput;
+        _playerInput.actions["Attack"].performed += ObjClicked;
+
     }
 
-    void ProgrammableClicked(InputAction.CallbackContext context) {
-        if (lastHovered != null)
+    void ObjClicked(InputAction.CallbackContext context)
+    {
+        if (lastHoveredPlatform != null)
         {
-            Programmable p = lastHovered.GetComponent<Programmable>();
+            Programmable p = lastHoveredPlatform.GetComponent<Programmable>();
             GameManager.Singleton.EditorUI.SetActive(true);
             Editor.Singleton.SetProgrammingObject(p);
+        }
+        else if (lastHoveredBool != null)
+        {
+            BooleanObject b = lastHoveredBool.GetComponent<BooleanObject>();
+            b.Clicked();
         }
     }
 
@@ -30,23 +42,24 @@ public class ProgrammableManager : MonoBehaviour
     {
         if (!tutorialActive)
         {
-            ProgrammableObjectRaycast();
+            lastHoveredPlatform = Raycast(lastHoveredPlatform, platforms);
+            lastHoveredBool = Raycast(lastHoveredBool, boolObjs);
         }
-        
+
     }
 
     public void setTutorial(bool state)
     {
         tutorialActive = state;
-        
+
     }
 
-    void ProgrammableObjectRaycast()
+    GameObject Raycast(GameObject lastHovered, LayerMask mask)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayer))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
         {
             GameObject currentHit = hit.collider.gameObject;
 
@@ -62,18 +75,31 @@ public class ProgrammableManager : MonoBehaviour
             OnHoverExit(lastHovered);
             lastHovered = null;
         }
+        return lastHovered;
     }
 
     void OnHoverEnter(GameObject obj)
     {
-        Programmable p = obj.GetComponent<Programmable>();
-        onObject = true;
-        p.HoverEnter();
+        if (obj.TryGetComponent<Programmable>(out var p))
+        {
+            p.HoverEnter();
+        }
+        else if (obj.TryGetComponent<BooleanObject>(out var b))
+        {
+            b.HoverExit();
+        }
+
     }
     void OnHoverExit(GameObject obj)
     {
-        Programmable p = obj.GetComponent<Programmable>();
-        onObject = false;
-        p.HoverExit();
+        if (obj.TryGetComponent<Programmable>(out var p))
+        {
+            p.HoverExit();
+        }
+
+        else if (obj.TryGetComponent<BooleanObject>(out var b))
+        {
+            b.HoverEnter();
+        }
     }
 }

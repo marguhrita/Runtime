@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     }
 
     // TODO make a disable movement method
-    void Start()
+    void Awake()
     {
         _singleton = this;
         playerInput = Player.GetComponent<PlayerInput>();

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6621190004128397779}
   - component: {fileID: 2494595387735988390}
   - component: {fileID: 791589513325303002}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BoolObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,4 +124,3 @@ MonoBehaviour:
   Name: blue
   MainColour: {r: 0.045033824, g: 0.47553653, b: 0.8679245, a: 0}
   Value: 1
-  mat: {fileID: 2100000, guid: 43bafc1e2620004449e84accc65dc429, type: 2}

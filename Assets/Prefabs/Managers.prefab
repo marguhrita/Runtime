@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6540277966209349476}
   - component: {fileID: 4845926789096936620}
   - component: {fileID: 2362637790220490279}
+  - component: {fileID: 1365713295973856518}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -100,13 +101,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a168fd166a6fb40921ea6231f19b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutscenes:
-  - {fileID: 11400000, guid: 66ec118a546b3784b9dcc1dc543d922c, type: 2}
-  - {fileID: 11400000, guid: 3cb6d181472e82d4cac812d4203d2ce2, type: 2}
-  - {fileID: 11400000, guid: 530358c5930f00742b2385c3bcfbbfeb, type: 2}
-  _playerInput: {fileID: 0}
+  cutscenes: []
   progressionIndicator: {fileID: 0}
   delay: 5
   playerCamera: {fileID: 0}
   panTargetCamera: {fileID: 0}
   cameraPanSpeed: 30
+--- !u!114 &1365713295973856518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7673713656622130553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d82e8bc62db9164481c93e9c0d186e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platforms:
+    serializedVersion: 2
+    m_Bits: 64
+  boolObjs:
+    serializedVersion: 2
+    m_Bits: 128

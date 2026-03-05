@@ -13,7 +13,7 @@ public class BooleanObject : MonoBehaviour
 
 
 
-    void OnMouseDown()
+    public void Clicked()
     {
         Value = !Value;
         GameManager.Singleton.BoolDict[Name] = Value;
@@ -26,8 +26,19 @@ public class BooleanObject : MonoBehaviour
         colourID = Shader.PropertyToID("_BaseColor");
         lastColour = ChooseTargetColour();
         mat.SetColor(colourID, lastColour);
+        mat.EnableKeyword("_EMISSION");
     }
 
+    public void HoverEnter() {
+        float intensity = 0.03f;
+        mat.SetColor("_EmissionColor", MainColour * intensity);
+    }
+
+    public void HoverExit() {
+        float intensity = 0.00f;
+        mat.SetColor("_EmissionColor", MainColour * intensity);
+    }
+    
     void Update()
     {
         // Change colour of the platform if state changed
