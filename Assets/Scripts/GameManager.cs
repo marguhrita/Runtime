@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public GameObject EditorUI;
     [SerializeField] public GameObject Player;
-    [SerializeField] public BooleanObject[] BooleanGameObjects;
+    public BooleanObject[] BooleanGameObjects { get; set; }
     public Dictionary<string, bool> BoolDict;
     public PlayerInput playerInput { get; private set; }
 
