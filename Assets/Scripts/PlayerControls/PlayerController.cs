@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public bool isMoving()
     {
         Vector2 moveVec = _moveAction.ReadValue<Vector2>();
-        return moveVec.magnitude >= 1f;
+        return moveVec.magnitude >= 0.2f;
     }
 
     public bool isJumping()

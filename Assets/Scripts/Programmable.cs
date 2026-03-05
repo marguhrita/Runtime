@@ -21,8 +21,7 @@ public class Programmable : MonoBehaviour
     private int colourID;
     private Color lastColour;
     private bool mouseOver;
-    private bool recursing;
-    private bool finished;
+
 
     void Start()
     {
@@ -50,13 +49,6 @@ public class Programmable : MonoBehaviour
 
         }
     }
-
-    // void OnMouseDown()
-    // {
-    //     GameManager.Singleton.EditorUI.SetActive(true);
-    //     Editor.Singleton.SetProgrammingObject(this);
-    // }
-
     private void lightUp(bool state)
     {
         if (state)
@@ -88,7 +80,7 @@ public class Programmable : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !running && !finished) // debounce
+        if (collision.gameObject.CompareTag("Player") && !running) // debounce
         {
             collision.transform.SetParent(transform); // pretty sure this was to keep the fish on the platform
             StartCoroutine(Run(Nodes));
@@ -178,7 +170,6 @@ public class Programmable : MonoBehaviour
                                 if (cond)
                                 {
                                     Debug.Log(i.body[0]);
-                                    recursing = true;
                                     yield return StartCoroutine(Run(i.body)); // runs the body of the IF statment
 
                                 }

@@ -8236,11 +8236,11 @@ PrefabInstance:
       propertyPath: Content
       value: 'if (purple){
 
-        movez(25)}
+        movez(34)}
 
         if (green){
 
-        movey(10)}'
+        movey(12)}'
       objectReference: {fileID: 0}
     - target: {fileID: 2824005543421336939, guid: 35bd130761e3877449068b4a97b56143, type: 3}
       propertyPath: Editable
@@ -8248,7 +8248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2824005543421336939, guid: 35bd130761e3877449068b4a97b56143, type: 3}
       propertyPath: duration
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4829720375526421448, guid: 35bd130761e3877449068b4a97b56143, type: 3}
       propertyPath: m_Name
@@ -8446,16 +8446,16 @@ PrefabInstance:
       propertyPath: Content
       value: 'if (brown){
 
-        movex(10)}
+        movex(15)}
 
         if (yellow){
 
-        movex(15)}
+        movex(20)}
 
         if
         (orange){
 
-        movez(10)'
+        movez(20)}'
       objectReference: {fileID: 0}
     - target: {fileID: 4829720375526421448, guid: 35bd130761e3877449068b4a97b56143, type: 3}
       propertyPath: m_Name
