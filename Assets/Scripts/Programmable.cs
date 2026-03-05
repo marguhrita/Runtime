@@ -80,13 +80,21 @@ public class Programmable : MonoBehaviour
 
     }
 
+    System.Collections.IEnumerator RunAndDeactivate(List<Node> nodes)
+    {
+        yield return StartCoroutine(Run(nodes));
+        transform.DetachChildren();
+        platformMat.SetColor(colourID, Color.gray1);
+        this.enabled = false;
+    
+}
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") && !running) // debounce
         {
-            // Debug.Log("PLAYER DETECTED!!!");
             collision.transform.SetParent(transform); // pretty sure this was to keep the fish on the platform
-            StartCoroutine(Run(Nodes));
+            StartCoroutine(RunAndDeactivate(Nodes));
         }
     }
 
@@ -155,11 +163,11 @@ public class Programmable : MonoBehaviour
                             }
 
                             break;
-                            
+
 
                     }
-                
-                break;
+
+                    break;
                 case IfStmt i:
                     // Debug.Log("IF Statement Detected");
                     switch (i)
@@ -181,9 +189,10 @@ public class Programmable : MonoBehaviour
                             break;
                     }
 
-                break;
+                    break;
             }
         }
+        
     }
 
 
