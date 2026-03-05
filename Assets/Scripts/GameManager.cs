@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public GameObject EditorUI;
     [SerializeField] public GameObject Player;
-    public BooleanObject[] BooleanGameObjects { get; set; }
+    [SerializeField] public BooleanObject[] BooleanGameObjects;
     public Dictionary<string, bool> BoolDict;
     public PlayerInput playerInput { get; private set; }
 
@@ -38,24 +38,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // TODO make a disable movement method
     void Awake()
     {
-        _singleton = this;
         playerInput = Player.GetComponent<PlayerInput>();
-        if (!BooleanGameObjects.IsUnityNull())
-        {
-            SerializeBoolDict();
-        }
+        _singleton = this;
+        BoolDict = new Dictionary<string, bool>();      
     }
 
-    public void SerializeBoolDict()
-    {
-        BoolDict = new Dictionary<string, bool>();
-        foreach (BooleanObject b in BooleanGameObjects)
-        {
-            BoolDict[b.Name] = b.Value;
-        }
-    }
 
 }

@@ -10,6 +10,8 @@ public class Programmable : MonoBehaviour
     public List<Node> Nodes { get; set; } = new List<Node>();
     [TextArea(4,10)]
     [SerializeField] public string Content;
+    [SerializeField] public bool Editable;
+
     private bool running;
     public float duration;
     public String PlatformName = "";
@@ -19,6 +21,8 @@ public class Programmable : MonoBehaviour
     private int colourID;
     private Color lastColour;
     private bool mouseOver;
+    private bool recursing;
+    private bool finished;
 
     void Start()
     {
@@ -80,21 +84,14 @@ public class Programmable : MonoBehaviour
 
     }
 
-    System.Collections.IEnumerator RunAndDeactivate(List<Node> nodes)
-    {
-        yield return StartCoroutine(Run(nodes));
-        transform.DetachChildren();
-        platformMat.SetColor(colourID, Color.gray1);
-        this.enabled = false;
-    
-}
+   
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !running) // debounce
+        if (collision.gameObject.CompareTag("Player") && !running && !finished) // debounce
         {
             collision.transform.SetParent(transform); // pretty sure this was to keep the fish on the platform
-            StartCoroutine(RunAndDeactivate(Nodes));
+            StartCoroutine(Run(Nodes));
         }
     }
 
@@ -181,6 +178,7 @@ public class Programmable : MonoBehaviour
                                 if (cond)
                                 {
                                     Debug.Log(i.body[0]);
+                                    recursing = true;
                                     yield return StartCoroutine(Run(i.body)); // runs the body of the IF statment
 
                                 }

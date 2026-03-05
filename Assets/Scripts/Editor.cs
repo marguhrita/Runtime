@@ -72,17 +72,21 @@ public class Editor : MonoBehaviour
     public void SetProgrammingObject(Programmable obj)
     {
         currentObject = obj;
-        // programmingLock = true;
 
         codeText.SetText(obj.Content);
         inputField.text = obj.Content;
 
-        Debug.Log(obj.PlatformName);
-        Debug.Log(obj.Content);
+        if (obj.Editable)
+        {
+            inputField.readOnly = false;
+        }
+        else
+        {
+            inputField.readOnly = true;
 
-        codeText.SetText("Sigma Poopoo");
+        }
 
-        // Debug.Log(codeText.text);
+
 
         Debug.Log($"Is codeText null? {codeText == null}. Is it active? {codeText.gameObject.activeInHierarchy}");
 

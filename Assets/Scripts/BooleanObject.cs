@@ -22,7 +22,7 @@ public class BooleanObject : MonoBehaviour
     void Start()
     {
         mat = GetComponent<Renderer>().material;
-
+        GameManager.Singleton.BoolDict[Name] = Value;
         colourID = Shader.PropertyToID("_BaseColor");
         lastColour = ChooseTargetColour();
         mat.SetColor(colourID, lastColour);
