@@ -60,18 +60,19 @@ public class TutorialManager : MonoBehaviour
     {
         progressionIndicator.enabled = false;
         currentStep += 1;
+        DialogueManager.Instance.SetIsProgressionFrozen(true);
 
         if (cameraCount < cameraSteps.Length && currentStep == cameraSteps[cameraCount])
         {
             // Activate the corresponding camera
             activePanCamera = panTargetCamera[cameraCount];
             activePanCamera.Priority = 15;
-            
+
             // Start the panning in the Update loop
             isPanning = true;
-            
+
             // Move to the next camera in the list for the next time
-            cameraCount++; 
+            cameraCount++;
         }
     }
 
@@ -79,10 +80,7 @@ public class TutorialManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         progressionIndicator.enabled = true;
-    }
 
-    void StepDone()
-    {
         // Stop the camera from spinning once the text finishes
         isPanning = false; 
 
@@ -92,7 +90,12 @@ public class TutorialManager : MonoBehaviour
             activePanCamera.Priority = 0;
             activePanCamera = null;
         }
-        
+
+    }
+
+    void StepDone()
+    {
         StartCoroutine(showIndicator());
+        DialogueManager.Instance.SetIsProgressionFrozen(false);
     }
 }

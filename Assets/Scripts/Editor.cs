@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using AppleCore.Node;
+using System;
 
 public class Editor : MonoBehaviour
 {
@@ -83,7 +84,6 @@ public class Editor : MonoBehaviour
         else
         {
             inputField.readOnly = true;
-
         }
 
 
@@ -95,8 +95,19 @@ public class Editor : MonoBehaviour
 
     public void Submit()
     {
-        List<Token> tokens = l.tokenize(codeText.text);
-        List<Node> nodes = p.Parse(tokens);
+        List<Node> nodes;
+        List<Token> tokens;
+        try
+        {
+            tokens = l.tokenize(codeText.text);
+            nodes = p.Parse(tokens);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Compilation Error: {e.Message}");
+            return;
+        }
+        
 
         currentObject.Content = inputField.text;
         // codeText.SetText("");
