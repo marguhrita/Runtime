@@ -110,7 +110,6 @@ public class Editor : MonoBehaviour
         
 
         currentObject.Content = inputField.text;
-        // codeText.SetText("");
         currentObject.Nodes = nodes;        // Store the nodes in the current object
         GameManager.Singleton.EditorUI.SetActive(false);
 

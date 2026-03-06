@@ -96,3 +96,31 @@ Good luck :)
 /
 /
 
+TITLE: 4-1
+NAME: Old Man
+
+Looks like you really made it...
+The city is getting smarter. Manually changing code is no longer possible.
+Try clicking on these IF blocks.
+This sets values which can influence platform code.
+
+/
+/
+
+TITLE: 4-2
+NAME: Old Man
+
+Sometimes more than one IF block needs to be activated.. or deactivated.
+Study the code carefully.
+
+/
+/
+
+
+TITLE: 4-3
+NAME: Old Man
+
+One last push - make sure you activate the right blocks.
+
+/
+/
