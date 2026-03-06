@@ -9,7 +9,8 @@ public class PlayerAnimator : MonoBehaviour
     void Update()
     {
         bool moving = pc.isMoving();
-        if (lastMovementState != moving)
+
+        if (!pc.isJumping())
             if (moving)
             {
                 animator.SetTrigger("Moving");
@@ -17,7 +18,6 @@ public class PlayerAnimator : MonoBehaviour
             else
             {
                 animator.SetTrigger("StoppedMoving");
-
             }
         lastMovementState = moving;
 
