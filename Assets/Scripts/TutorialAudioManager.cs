@@ -7,7 +7,7 @@ public class TutorialAudioManager : MonoBehaviour
     [SerializeField] AudioClip[] Level2Clips;
     [SerializeField] AudioClip[] Level3Clips;
     [SerializeField] AudioClip[] Level4Clips;
-    public enum Levels {Level1, Level2, Level3, Level4}
+    public enum Levels { Level1, Level2, Level3, Level4 }
     public Levels currentLevel;
     private AudioClip[] currentClip;
     [SerializeField] private AudioSource _audioSource;
@@ -35,9 +35,16 @@ public class TutorialAudioManager : MonoBehaviour
 
     public void PlayClip(int step)
     {
+        StartCoroutine(Play(step));
+
+    }
+
+    IEnumerator Play(int step)
+    {
         _audioSource.clip = currentClip[step];
         _audioSource.Play();
 
+        yield return new WaitForSeconds(3f);
     }
 
 }

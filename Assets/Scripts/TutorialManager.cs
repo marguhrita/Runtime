@@ -28,6 +28,8 @@ public class TutorialManager : MonoBehaviour
     private bool isPanning = false;
     private CinemachineCamera activePanCamera;
 
+    private TutorialAudioManager tutorialAudioManager;
+
     public void TriggerEntered(int CutsceneNumber)
     {
         Debug.Log(CutsceneNumber - 1);
@@ -35,10 +37,13 @@ public class TutorialManager : MonoBehaviour
         _playerInput = GameManager.Singleton.playerInput;
         _playerInput.actions["Attack"].performed += DialogueManager.Instance.ProgressDialogueEvent;
         progressionIndicator.enabled = false;
+
+        tutorialAudioManager.PlayClip(CutsceneNumber-1);
     }
 
     void Start()
     {
+        tutorialAudioManager = GetComponent<TutorialAudioManager>();
         DialogueManager.Instance.TextPanel.OnTextDoneIterating += StepDone;
         currentStep = 0;
         cameraCount = 0;
@@ -93,9 +98,15 @@ public class TutorialManager : MonoBehaviour
 
     }
 
+    // public void DialogueStarted()
+    // {
+    //      // play the first clip
+    // }
+
     void StepDone()
     {
         StartCoroutine(showIndicator());
         DialogueManager.Instance.SetIsProgressionFrozen(false);
+
     }
 }
