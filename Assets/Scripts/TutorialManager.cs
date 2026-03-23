@@ -32,7 +32,7 @@ public class TutorialManager : MonoBehaviour
 
     public void TriggerEntered(int CutsceneNumber)
     {
-        Debug.Log(CutsceneNumber - 1);
+        // Debug.Log(CutsceneNumber - 1);
         DialogueManager.Instance.StartNewDialogue(cutscenes[CutsceneNumber - 1]);
         _playerInput = GameManager.Singleton.playerInput;
         _playerInput.actions["Attack"].performed += DialogueManager.Instance.ProgressDialogueEvent;
