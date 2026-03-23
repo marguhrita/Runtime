@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8172f814dfb90144da7ce6b582d75da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EditorUI: {fileID: 0}
+  EditorUI: {fileID: 2019527857509348180, guid: 79a400cba72f0b346bc06b20c34b512e, type: 3}
   Player: {fileID: 0}
   BooleanGameObjects: []
 --- !u!114 &2362637790220490279
