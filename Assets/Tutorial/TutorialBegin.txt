@@ -1,7 +1,7 @@
 BEGIN
 TITLE: 1-1
 
-NAME: Old Man
+NAME: Mysterious Figure
 
 Hey there - I'm your guide for today. Welcome to the backend of the city.
 See that platform? It's already been coded with a MOVE function to move across that gap.
@@ -12,7 +12,7 @@ Press submit on the code to lock it in!
 
 TITLE: 1-2
 
-NAME: Old Man
+NAME: Mysterious Figure
 
 Good job using the first platform!
 Now take a look at the next one.
@@ -23,7 +23,7 @@ The number in the brackets is how far it moves!
 
 TITLE: 1-3
 
-NAME: Old Man
+NAME: Mysterious Figure
 
 Excellent work - you're way better than the last guy
 Platforms can take more than one MOVE function at a time!
@@ -36,7 +36,7 @@ Try it out!
 
 TITLE: 2-1
 
-NAME: Old Man
+NAME: Mysterious Figure
 
 Welcome to the next level!
 This time, let's try changing the code
@@ -47,7 +47,7 @@ Try changing the number for a larger one
 
 TITLE: 2-2
 
-NAME: Old Man
+NAME: Mysterious Figure
 
 Fantastical job.
 For the next platform, "x" is the wrong direction!
@@ -57,7 +57,7 @@ Try changing the "movex" command to progress
 /
 TITLE: 2-3
 
-NAME: Old Man
+NAME: Mysterious Figure
 
 Took you long enough...
 You're on your own for this next one
@@ -68,7 +68,7 @@ Good luck!
 
 TITLE: 3-1
 
-NAME: Old Man
+NAME: Mysterious Figure
 
 Time to make your own code to get to the end!
 You will have to code the platforms in this level yourself.
@@ -79,7 +79,7 @@ The cheat sheet will help!
 /
 
 TITLE: 3-2
-NAME: Old Man
+NAME: Mysterious Figure
 
 This one is a bit trickier - you will need two move commands
 Use the compass again to figure it out!
@@ -88,7 +88,7 @@ Use the compass again to figure it out!
 /
 
 TITLE: 3-3
-NAME: Old Man
+NAME: Mysterious Figure
 
 The hardest one yet!
 Good luck :)
@@ -97,7 +97,7 @@ Good luck :)
 /
 
 TITLE: 4-1
-NAME: Old Man
+NAME: Mysterious Figure
 
 Looks like you really made it...
 The city is getting smarter. Manually changing code is no longer possible.
@@ -108,7 +108,7 @@ This sets values which can influence platform code.
 /
 
 TITLE: 4-2
-NAME: Old Man
+NAME: Mysterious Figure
 
 Sometimes more than one IF block needs to be activated.. or deactivated.
 Study the code carefully.
@@ -118,7 +118,7 @@ Study the code carefully.
 
 
 TITLE: 4-3
-NAME: Old Man
+NAME: Mysterious Figure
 
 One last push - make sure you activate the right blocks.
 

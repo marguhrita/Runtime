@@ -6239,6 +6239,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1257880205}
     - target: {fileID: 6540277966209349476, guid: 73d0efef2081a33449eb2617f9972b47, type: 3}
+      propertyPath: _characterBank
+      value: 
+      objectReference: {fileID: 11400000, guid: c164caf7d2948dc4ba8bb2048cf3775d, type: 2}
+    - target: {fileID: 6540277966209349476, guid: 73d0efef2081a33449eb2617f9972b47, type: 3}
       propertyPath: _portraitPanel
       value: 
       objectReference: {fileID: 1257880204}
