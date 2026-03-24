@@ -194,7 +194,7 @@ public class Programmable : MonoBehaviour
 
     void MoveObject(float x, float y, float z)
     {
-        // Debug.Log("Moving");
+
         try
         {
             Vector3 target = transform.position + new Vector3(x, y, z);
