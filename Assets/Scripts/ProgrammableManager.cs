@@ -25,16 +25,20 @@ public class ProgrammableManager : MonoBehaviour
 
     void ObjClicked(InputAction.CallbackContext context)
     {
-        if (lastHoveredPlatform != null)
+        if (!GameManager.Singleton.tutorialManager.isTutorialActive)
         {
-            Programmable p = lastHoveredPlatform.GetComponent<Programmable>();
-            GameManager.Singleton.EditorUI.SetActive(true);
-            Editor.Singleton.SetProgrammingObject(p);
-        }
-        else if (lastHoveredBool != null)
-        {
-            BooleanObject b = lastHoveredBool.GetComponent<BooleanObject>();
-            b.Clicked();
+
+            if (lastHoveredPlatform != null)
+            {
+                Programmable p = lastHoveredPlatform.GetComponent<Programmable>();
+                GameManager.Singleton.EditorUI.SetActive(true);
+                Editor.Singleton.SetProgrammingObject(p);
+            }
+            else if (lastHoveredBool != null)
+            {
+                BooleanObject b = lastHoveredBool.GetComponent<BooleanObject>();
+                b.Clicked();
+            }
         }
     }
 
@@ -80,26 +84,33 @@ public class ProgrammableManager : MonoBehaviour
 
     void OnHoverEnter(GameObject obj)
     {
-        if (obj.TryGetComponent<Programmable>(out var p))
-        {
-            p.HoverEnter();
+        if (!GameManager.Singleton.tutorialManager.isTutorialActive){
+            if (obj.TryGetComponent<Programmable>(out var p))
+                    {
+                        p.HoverEnter();
+                    }
+                    else if (obj.TryGetComponent<BooleanObject>(out var b))
+                    {
+                        b.HoverExit();
+                    }
         }
-        else if (obj.TryGetComponent<BooleanObject>(out var b))
-        {
-            b.HoverExit();
-        }
+        
 
     }
     void OnHoverExit(GameObject obj)
     {
-        if (obj.TryGetComponent<Programmable>(out var p))
+        if (!GameManager.Singleton.tutorialManager.isTutorialActive)
         {
-            p.HoverExit();
-        }
 
-        else if (obj.TryGetComponent<BooleanObject>(out var b))
-        {
-            b.HoverEnter();
+            if (obj.TryGetComponent<Programmable>(out var p))
+            {
+                p.HoverExit();
+            }
+
+            else if (obj.TryGetComponent<BooleanObject>(out var b))
+            {
+                b.HoverEnter();
+            }
         }
     }
 }

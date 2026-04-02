@@ -6246,6 +6246,34 @@ PrefabInstance:
       propertyPath: _portraitPanel
       value: 
       objectReference: {fileID: 1257880204}
+    - target: {fileID: 6540277966209349476, guid: 73d0efef2081a33449eb2617f9972b47, type: 3}
+      propertyPath: UOnDialogueEnded.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6540277966209349476, guid: 73d0efef2081a33449eb2617f9972b47, type: 3}
+      propertyPath: UOnDialogueEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6540277966209349476, guid: 73d0efef2081a33449eb2617f9972b47, type: 3}
+      propertyPath: UOnDialogueEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1631746549}
+    - target: {fileID: 6540277966209349476, guid: 73d0efef2081a33449eb2617f9972b47, type: 3}
+      propertyPath: UOnDialogueEnded.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6540277966209349476, guid: 73d0efef2081a33449eb2617f9972b47, type: 3}
+      propertyPath: UOnDialogueEnded.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: setTutorialActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 6540277966209349476, guid: 73d0efef2081a33449eb2617f9972b47, type: 3}
+      propertyPath: UOnDialogueEnded.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TutorialManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6540277966209349476, guid: 73d0efef2081a33449eb2617f9972b47, type: 3}
+      propertyPath: UOnDialogueEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7673713656622130553, guid: 73d0efef2081a33449eb2617f9972b47, type: 3}
       propertyPath: m_Name
       value: Managers

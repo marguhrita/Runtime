@@ -11,16 +11,16 @@ using System.Collections;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] Cutscene[] cutscenes;
-    private PlayerInput _playerInput;    
+    private PlayerInput _playerInput;
     [SerializeField] private RawImage progressionIndicator;
     [SerializeField] private float delay;
-    
+
     [SerializeField] private int[] cameraSteps;
 
     [Header("Cameras")]
     public CinemachineCamera playerCamera;
-    public CinemachineCamera[] panTargetCamera; 
-    
+    public CinemachineCamera[] panTargetCamera;
+
     private int cameraCount;
     private int currentStep;
     [SerializeField] private float cameraPanSpeed;
@@ -29,17 +29,22 @@ public class TutorialManager : MonoBehaviour
     private CinemachineCamera activePanCamera;
 
     private TutorialAudioManager tutorialAudioManager;
+    public bool isTutorialActive { get; private set; }
+
+    public void setTutorialActive(bool state)
+    {
+        isTutorialActive = state;
+    }
 
     public void TriggerEntered(int CutsceneNumber)
     {
-        // Debug.Log(CutsceneNumber - 1);
         DialogueManager.Instance.StartNewDialogue(cutscenes[CutsceneNumber - 1]);
-        _playerInput = GameManager.Singleton.playerInput;
-        _playerInput.actions["Attack"].performed += DialogueManager.Instance.ProgressDialogueEvent;
+        setTutorialActive(true);
         progressionIndicator.enabled = false;
 
-        tutorialAudioManager.PlayClip(CutsceneNumber-1);
+        tutorialAudioManager.PlayClip(CutsceneNumber - 1);
     }
+
 
     void Start()
     {
@@ -47,6 +52,9 @@ public class TutorialManager : MonoBehaviour
         DialogueManager.Instance.TextPanel.OnTextDoneIterating += StepDone;
         currentStep = 0;
         cameraCount = 0;
+
+        _playerInput = GameManager.Singleton.playerInput;
+        _playerInput.actions["Attack"].performed += DialogueManager.Instance.ProgressDialogueEvent;
     }
 
     void Update()
@@ -79,6 +87,8 @@ public class TutorialManager : MonoBehaviour
             // Move to the next camera in the list for the next time
             cameraCount++;
         }
+
+
     }
 
     public IEnumerator showIndicator()
@@ -98,10 +108,6 @@ public class TutorialManager : MonoBehaviour
 
     }
 
-    // public void DialogueStarted()
-    // {
-    //      // play the first clip
-    // }
 
     void StepDone()
     {

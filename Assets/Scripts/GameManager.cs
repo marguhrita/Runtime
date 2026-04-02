@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public BooleanObject[] BooleanGameObjects;
     public Dictionary<string, bool> BoolDict;
     public PlayerInput playerInput { get; private set; }
+    public TutorialManager tutorialManager;
 
 
     void Update()
@@ -42,7 +43,8 @@ public class GameManager : MonoBehaviour
     {
         playerInput = Player.GetComponent<PlayerInput>();
         _singleton = this;
-        BoolDict = new Dictionary<string, bool>();      
+        BoolDict = new Dictionary<string, bool>();
+        tutorialManager = GetComponent<TutorialManager>();   
     }
 
 
